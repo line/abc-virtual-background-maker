@@ -61,8 +61,8 @@ jobs:
         run: |
           VERSION_PREFIX="v"
           VERSION_HEAD=$(cut -d '.' -f 1 <<< ${{ fromJson(env.PACKAGE_JSON).version }})
-          VERSION_YEAR=$(date +%Y | cut -c 3-4)
-          VERSION_WEEK=$(date +%U)
+          VERSION_YEAR=$(date +%g)
+          VERSION_WEEK=$(date +%V)
           VERSION_BUILD=${{github.run_number}}
           NEW_TAG="${VERSION_PREFIX}${VERSION_HEAD}.${VERSION_YEAR}${VERSION_WEEK}.${VERSION_BUILD}"
           echo "Generated new tag: $NEW_TAG"
