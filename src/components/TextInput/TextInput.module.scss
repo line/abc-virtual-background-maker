@@ -1,0 +1,115 @@
+/**
+ * Copyright 2023 LINE Corporation
+ *
+ * LINE Corporation licenses this file to you under the Apache License,
+ * version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at:
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+.wrapper {
+  position: relative;
+
+  &.left {
+    text-align: left;
+  }
+
+  &.center {
+    text-align: center;
+  }
+
+  &.right {
+    text-align: right;
+  }
+}
+
+.box {
+  position: relative;
+
+  .tag {
+    @include font("10");
+
+    position: absolute;
+    top: -0.1rem;
+    left: -0.1rem;
+    display: none;
+    padding: 0.1rem 0.3rem;
+    color: #000;
+    text-transform: capitalize;
+    background-color: #3f0;
+    transform: scale(0.9) translateY(-100%);
+    transform-origin: top left;
+  }
+
+  .label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    border: 0.063rem solid transparent;
+    opacity: 0;
+
+    &.visible {
+      opacity: 1;
+    }
+
+    > input {
+      display: block;
+      width: 100%;
+      overflow-y: hidden;
+      color: var(--text-color, transparent);
+      font-weight: bold;
+      font-size: var(--font-size);
+      font-style: inherit;
+      line-height: 1.1;
+      text-align: inherit;
+
+      &::placeholder {
+        color: var(--text-color, transparent);
+      }
+    }
+  }
+}
+
+.focused,
+.dragging {
+  .label {
+    box-shadow: 0 0 0 0.1rem#33ff00;
+  }
+
+  .tag {
+    display: block;
+  }
+}
+
+.dragging {
+  cursor: move;
+}
+
+.overlay-text {
+  display: block;
+  width: 100%;
+  color: var(--text-color);
+  color: var(--text-color, transparent);
+  font-weight: bold;
+  font-size: var(--font-size);
+  font-style: inherit;
+  line-height: 1.1;
+  white-space: nowrap;
+  text-align: inherit;
+  border: 0.063rem solid transparent;
+  visibility: hidden;
+  pointer-events: none;
+
+  &.visible {
+    visibility: visible;
+  }
+}

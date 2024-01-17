@@ -1,0 +1,82 @@
+/**
+ * Copyright 2023 LINE Corporation
+ *
+ * LINE Corporation licenses this file to you under the Apache License,
+ * version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at:
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+.button {
+  @include pressed;
+  @include font("12", "label-inverse");
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  background-color: var(--key-color, var(--label-primary));
+  border-radius: 0.375rem;
+  overflow: hidden;
+
+  &:not(.disabled) {
+    &::after {
+      background: var(--label-inverse);
+      content: "";
+      height: 155px;
+      left: -75px;
+      opacity: 0.2;
+      position: absolute;
+      top: -50px;
+      transform: rotate(35deg);
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+      width: 50px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    &:hover {
+      &::after {
+        left: 120%;
+        transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+      }
+    }
+  }
+
+  &.disabled {
+    color: var(--label-tertiary);
+    background-color: var(--fill-tertiary);
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1rem;
+  border-right: 0.063rem solid rgb(255 255 255 / 10%);
+
+  @media (prefers-color-scheme: dark) {
+    border-color: rgb(0 0 0 / 10%);
+  }
+
+  @include mobile {
+    border-right: none;
+  }
+}
+
+.text {
+  padding: 0 1rem;
+
+  @include mobile {
+    display: none;
+  }
+}

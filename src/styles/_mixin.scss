@@ -1,0 +1,108 @@
+/**
+ * Copyright 2023 LINE Corporation
+ *
+ * LINE Corporation licenses this file to you under the Apache License,
+ * version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at:
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+@use "sass:map";
+@use "./font" as f;
+
+$breakpoint-mobile-small: 360px;
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1280px;
+
+@mixin font($fontType, $color: null) {
+  $fonts: f.$fonts;
+
+  @if map-has-key($fonts, $fontType) {
+    @each $key, $value in map.get($fonts, $fontType) {
+      #{$key}: $value;
+    }
+  }
+
+  @if $color {
+    color: var(--#{$color});
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$breakpoint-mobile - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+@mixin media($keys...) {
+  @each $key in $keys {
+    @if $key == mobile {
+      @include mobile {
+        @content;
+      }
+    } @else if $key == tablet {
+      @include tablet {
+        @content;
+      }
+    } @else if $key == desktop {
+      @include desktop {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin scroll($key) {
+  @if $key == vertical {
+    overflow: hidden auto;
+  }
+
+  @if $key == horizontal {
+    overflow: auto hidden;
+  }
+
+  display: flex;
+  flex-wrap: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > * {
+    flex: 0 0 auto;
+  }
+}
+
+@mixin pressed($key: "light") {
+  transition: transform 0.1s cubic-bezier(0.17, 0.55, 0.55, 1);
+
+  &:active {
+    @if $key == light {
+      transform: scale(0.98);
+    }
+
+    @if $key == medium {
+      transform: scale(0.95);
+    }
+  }
+}

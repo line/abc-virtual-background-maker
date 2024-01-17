@@ -1,0 +1,81 @@
+/**
+ * Copyright 2023 LINE Corporation
+ *
+ * LINE Corporation licenses this file to you under the Apache License,
+ * version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at:
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+:root {
+  --label-primary: rgb(0 0 0 / 100%);
+  --label-secondary: rgb(60 60 67 / 60%);
+  --label-tertiary: rgb(60 60 67 / 30%);
+  --label-quaternary: rgb(60 60 67 / 18%);
+  --label-inverse: rgb(255 255 255 / 100%);
+  --label-above-primary: rgb(255 255 255 / 100%);
+  --label-above-secondary: rgb(255 255 255 / 64%);
+  --label-above-tertiary: rgb(255 255 255 / 44%);
+  --label-above-quaternary: rgb(255 255 255 / 34%);
+  --fill-primary: rgb(0 0 0 / 100%);
+  --fill-secondary: rgb(120 120 128 / 16%);
+  --fill-tertiary: rgb(120 120 128 / 12%);
+  --fill-quaternary: rgb(120 120 128 / 8%);
+  --fill-inverse: rgb(255 255 255 / 100%);
+  --background-primary: rgb(255 255 255 / 100%);
+  --background-secondary: #f2f2f7;
+  --background-tertiary: rgb(255 255 255 / 100%);
+  --background-dim: rgb(0 0 0 / 50%);
+  --red-primary: rgb(218 55 52 / 100%);
+  --red-secondary: rgb(218 55 52 / 60%);
+  --red-tertiary: rgb(218 55 52 / 30%);
+  --red-quaternary: rgb(218 55 52 / 12%);
+  --orange-primary: rgb(255 159 10 / 100%);
+  --orange-secondary: rgb(255 159 10 / 60%);
+  --orange-tertiary: rgb(255 159 10 / 30%);
+  --orange-quaternary: rgb(255 159 10 / 12%);
+  --yellow-primary: rgb(255 215 10 / 100%);
+  --yellow-secondary: rgb(255 215 10 / 60%);
+  --yellow-tertiary: rgb(255 215 10 / 30%);
+  --yellow-quaternary: rgb(255 215 10 / 12%);
+  --green-primary: rgb(50 214 75 / 100%);
+  --green-secondary: rgb(50 214 75 / 60%);
+  --green-tertiary: rgb(50 214 75 / 30%);
+  --green-quaternary: rgb(50 214 75 / 12%);
+  --blue-primary: rgb(10 132 255 / 100%);
+  --blue-secondary: rgb(10 132 255 / 60%);
+  --blue-tertiary: rgb(10 132 255 / 30%);
+  --blue-quaternary: rgb(10 132 255 / 12%);
+  --navy-primary: rgb(79 77 214 / 100%);
+  --navy-secondary: rgb(79 77 214 / 60%);
+  --navy-tertiary: rgb(79 77 214 / 30%);
+  --navy-quaternary: rgb(79 77 214 / 12%);
+  --purple-primary: rgb(191 90 242 / 100%);
+  --purple-secondary: rgb(191 90 242 / 60%);
+  --purple-tertiary: rgb(191 90 242 / 30%);
+  --purple-quaternary: rgb(191 90 242 / 12%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --label-primary: rgb(255 255 255 / 100%);
+    --label-secondary: rgb(235 235 245 / 60%);
+    --label-tertiary: rgb(235 235 245 / 30%);
+    --label-quaternary: rgb(235 235 245 / 18%);
+    --label-inverse: rgb(0 0 0 / 100%);
+    --fill-primary: rgb(255 255 255 / 100%);
+    --fill-secondary: rgb(120 120 128 / 32%);
+    --fill-tertiary: rgb(120 120 128 / 24%);
+    --fill-quaternary: rgb(120 120 128 / 18%);
+    --fill-inverse: rgb(0 0 0 / 100%);
+    --background-primary: rgb(0 0 0 / 100%);
+    --background-secondary: #18181a;
+    --background-tertiary: #2a2a2c;
+  }
+}

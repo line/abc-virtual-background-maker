@@ -1,0 +1,74 @@
+/**
+ * Copyright 2023 LINE Corporation
+ *
+ * LINE Corporation licenses this file to you under the Apache License,
+ * version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at:
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+.bar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  height: 4.5rem;
+  padding: 0 1.5rem;
+  background-color: var(--background-primary);
+  box-shadow: 0 0.5px 0 0 rgb(0 0 0 / 10%);
+
+  @include mobile {
+    position: sticky;
+    top: 0;
+  }
+}
+
+.logo {
+  display: flex;
+  flex-shrink: 0;
+  margin-right: auto;
+
+  @media (prefers-color-scheme: dark) {
+    filter: brightness(0) invert(1);
+  }
+
+  > img {
+    width: auto;
+    height: 1.25rem;
+
+    @include mobile {
+      height: 1.1rem;
+    }
+  }
+}
+
+.content {
+  display: flex;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.navigation {
+  h2 {
+    @include font("16", "label-primary");
+
+    padding: 1.5rem 1.5rem 1rem;
+    font-weight: bold;
+  }
+
+  > div {
+    display: flex;
+
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+}

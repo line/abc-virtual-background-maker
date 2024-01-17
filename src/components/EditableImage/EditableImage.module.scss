@@ -1,0 +1,110 @@
+/**
+ * Copyright 2023 LINE Corporation
+ *
+ * LINE Corporation licenses this file to you under the Apache License,
+ * version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at:
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+.image {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+
+  &.flip {
+    transform: scaleX(-1);
+  }
+
+  > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-user-drag: none;
+  }
+
+  .inputs {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    padding: 2.5rem 2.3rem;
+    transform: scale(var(--text-scale));
+
+    &.top-left {
+      top: 0;
+      left: 0;
+      transform-origin: top left;
+    }
+
+    &.top-center {
+      top: 0;
+      left: 50%;
+      transform: scale(var(--text-scale)) translateX(-50%);
+      transform-origin: top left;
+    }
+
+    &.top-right {
+      top: 0;
+      right: 0;
+      transform-origin: top right;
+    }
+
+    &.center-left {
+      top: 50%;
+      left: 0;
+      transform: scale(var(--text-scale)) translateY(-50%);
+      transform-origin: top left;
+    }
+
+    &.center {
+      top: 50%;
+      left: 50%;
+      transform: scale(var(--text-scale)) translate(-50%, -50%);
+      transform-origin: top left;
+    }
+
+    &.center-right {
+      top: 50%;
+      right: 0;
+      transform: scale(var(--text-scale)) translateY(-50%);
+      transform-origin: top right;
+    }
+
+    &.bottom-left {
+      bottom: 0;
+      left: 0;
+      transform-origin: bottom left;
+    }
+
+    &.bottom-center {
+      bottom: 0;
+      left: 50%;
+      transform: scale(var(--text-scale)) translateX(-50%);
+      transform-origin: bottom left;
+    }
+
+    &.bottom-right {
+      bottom: 0;
+      right: 0;
+      transform-origin: bottom right;
+    }
+
+    > li {
+      margin: 0 0.5rem;
+
+      &:first-of-type {
+        margin: 0 0.5rem 0.5rem;
+      }
+    }
+  }
+}
