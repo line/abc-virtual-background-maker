@@ -13,6 +13,4 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-export { convertRgbToHex } from "./convertRgbToHex";
-export { convertHexToRgb } from "./convertHexToRgb";
-export { readConfigurationFromGithub } from "./readConfigurationFromGithub";
+export { default as SyncButton } from "./SyncButton";

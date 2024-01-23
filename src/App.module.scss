@@ -41,6 +41,7 @@
   > img {
     width: auto;
     height: 1.25rem;
+    -webkit-user-drag: none;
 
     @include mobile {
       height: 1.1rem;
@@ -60,8 +61,25 @@
   h2 {
     @include font("16", "label-primary");
 
-    padding: 1.5rem 1.5rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 1.5rem 1.5rem 1.25rem;
     font-weight: bold;
+
+    > button {
+      margin-left: 0.5rem;
+      opacity: 0;
+
+      @include mobile {
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      > button {
+        opacity: 1;
+      }
+    }
   }
 
   > div {

@@ -69,9 +69,9 @@ function useDraggableScroll(
   const cursorStyleOfChildElements = useRef<Array<string>>([]);
   const transformStyleOfChildElements = useRef<Array<string>>([]);
   const transitionStyleOfChildElements = useRef<Array<string>>([]);
-  const rubberBandAnimationTimer = useRef<number>();
-  const keepMovingX = useRef<number>();
-  const keepMovingY = useRef<number>();
+  const rubberBandAnimationTimer = useRef<NodeJS.Timeout>();
+  const keepMovingX = useRef<NodeJS.Timeout>();
+  const keepMovingY = useRef<NodeJS.Timeout>();
   const timing = (1 / 60) * 1000;
 
   useLayoutEffect(() => {

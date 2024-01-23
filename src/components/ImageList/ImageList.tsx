@@ -14,7 +14,6 @@
  * under the License.
  */
 import { MutableRefObject, useEffect, useRef } from "react";
-import { themes } from "~/app.config.json";
 
 import { ImageButton } from "@/components";
 import { Image } from "@/constants";
@@ -23,6 +22,7 @@ import styles from "./ImageList.module.scss";
 
 const ImageList = () => {
   const {
+    themes,
     selectedTheme,
     selectedImage,
     handleChangeImage,

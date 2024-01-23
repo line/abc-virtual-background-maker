@@ -16,18 +16,33 @@
 import {
   ChangeEvent,
   createContext,
+  MouseEvent,
   PropsWithChildren,
+  useCallback,
   useEffect,
   useState,
 } from "react";
 import config from "~/app.config.json";
+import axios, { AxiosError } from "axios";
 
-import { Image } from "@/constants";
+import { Image, InputFieldGroup, Theme } from "@/constants";
+import { readConfigurationFromGithub } from "@/utils";
+
+// Create a custom axios instance with default headers
+const githubAxios = axios.create({
+  headers: {
+    Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+  },
+});
 
 interface ContextProps {
+  themes: Array<Theme>;
   selectedTheme: string;
   selectedImage: Image;
   customImages: Array<Image>;
+  defaultInputFields: Array<InputFieldGroup>;
+  isSyncing: boolean;
+  handleClickSync: (event: MouseEvent<HTMLButtonElement>) => void;
   handleChangeTheme: (theme: string) => void;
   handleChangeImage: (theme: string, image: Image) => void;
   handleDropCustomImages: (event: DragEvent) => void;
@@ -36,9 +51,15 @@ interface ContextProps {
 }
 
 export const AppContext = createContext<ContextProps>({
+  themes: [],
   customImages: [],
   selectedTheme: "all",
-  selectedImage: config.themes[0].backgrounds[0],
+  selectedImage: {
+    src: "",
+  },
+  defaultInputFields: [],
+  isSyncing: false,
+  handleClickSync: () => {},
   handleChangeTheme: () => {},
   handleChangeImage: () => {},
   handleDropCustomImages: () => {},
@@ -48,12 +69,43 @@ export const AppContext = createContext<ContextProps>({
 
 export const AppProvider = (props: PropsWithChildren) => {
   const { children } = props;
-  const [selectedImage, setSelectedImage] = useState({
-    theme: config.themes[0].name,
-    ...config.themes[0].backgrounds[0],
+  const { backgroundsUri } = config;
+  const { defaultInputFields } = config;
+  const [themes, setThemes] = useState<Array<Theme>>([]);
+  const [selectedImage, setSelectedImage] = useState<Image>({
+    theme: "",
+    src: "",
   });
   const [selectedTheme, setSelectedTheme] = useState("all");
   const [customImages, setCustomImages] = useState<Array<Image>>([]);
+  const [isSyncing, setIsSyncing] = useState(false);
+
+  const resetThemes = async (path: string, type: string) => {
+    const lowerCasedType = type.trim().toLowerCase();
+    switch (lowerCasedType) {
+      case "filesystem":
+      case "cdn":
+        setThemes(config.themes as Array<Theme>);
+        setSelectedImage(config.themes[0].backgrounds[0]);
+        break;
+      case "github":
+        try {
+          const themes = await readConfigurationFromGithub(githubAxios, path);
+          if (themes) {
+            setThemes(themes);
+            setSelectedImage(themes[0].backgrounds[0]);
+          }
+        } catch (error) {
+          console.error(
+            `Error reading configuration from github:`,
+            (error as AxiosError).message,
+          );
+        }
+        break;
+      default:
+        console.warn("Unknown type:", type);
+    }
+  };
 
   const handleDropCustomImages = (event: DragEvent) => {
     const src = URL.createObjectURL(
@@ -85,6 +137,20 @@ export const AppProvider = (props: PropsWithChildren) => {
     setSelectedImage({ theme, ...image });
   };
 
+  const handleClickSync = useCallback(() => {
+    setIsSyncing(true);
+    backgroundsUri && resetThemes(backgroundsUri.path, backgroundsUri.type);
+    const timer = setTimeout(() => {
+      setIsSyncing(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [backgroundsUri]);
+
+  useEffect(() => {
+    backgroundsUri && resetThemes(backgroundsUri.path, backgroundsUri.type);
+  }, [backgroundsUri]);
+
   useEffect(() => {
     if (selectedTheme === "custom") {
       handleChangeImage(
@@ -99,9 +165,13 @@ export const AppProvider = (props: PropsWithChildren) => {
   return (
     <AppContext.Provider
       value={{
+        themes,
         customImages,
         selectedTheme,
         selectedImage,
+        defaultInputFields: defaultInputFields as Array<InputFieldGroup>,
+        isSyncing,
+        handleClickSync,
         handleChangeTheme,
         handleChangeImage,
         handleDropCustomImages,

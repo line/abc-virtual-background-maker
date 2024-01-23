@@ -16,13 +16,11 @@
 import {
   FocusEvent,
   forwardRef,
-  MouseEvent,
   useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
-import { backgroundsUri, defaultInputFields, themes } from "~/app.config.json";
 
 import {
   AlignSelect,
@@ -53,10 +51,10 @@ import styles from "./Editor.module.scss";
 const DEFAULT_FONT_STYLE = "LINE Seed";
 
 const Editor = forwardRef<HTMLDivElement>((_, ref) => {
-  const { selectedImage, selectedTheme } = useAppConfiguration();
+  const { themes, selectedImage, selectedTheme, defaultInputFields } =
+    useAppConfiguration();
   const { src, fontColor, theme } = selectedImage;
-  const imageSrc = src.includes("blob:") ? src : `${backgroundsUri}/${src}`;
-  const { isDarkImage } = useImageColor(imageSrc);
+  const { isDarkImage } = useImageColor(src);
   const [dragKey, setDragKey] = useState("");
   const [guideVisible, setGuideVisible] = useState(false);
   const [isImageFlip, setIsImageFlip] = useState(false);
@@ -75,18 +73,13 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
 
   const handleClickGithub = () => {
     window.open(
-      "https://github.com/line/abc-virtual-background-maker",
+      "https://www.github.com/line/abc-virtual-background-maker",
       "_blank",
       "noopener,noreferrer",
     );
   };
 
-  const handleClickInput = (event: MouseEvent<HTMLButtonElement>) => {
-    const label =
-      (
-        event.target as HTMLButtonElement
-      ).parentNode?.childNodes[0].textContent?.toLowerCase() ?? "";
-
+  const handleClickInput = (label: string) => {
     setInputOptions((prevState) => {
       return {
         ...prevState,
@@ -335,7 +328,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                       label={label}
                       isRequired={isRequired}
                       isSelected={Boolean(inputOptions[label]?.isVisible)}
-                      onClick={handleClickInput}
+                      onClick={() => handleClickInput(label)}
                     />
                   </li>
                 ))}

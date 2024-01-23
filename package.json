@@ -1,12 +1,11 @@
 {
   "name": "abc-virtual-background-maker",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "read-files": "node readBackgrounds.js && prettier --write app.config.json",
     "dev": "vite",
-    "build": "tsc && vite build && cp -r './backgrounds' './dist/backgrounds'",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "stylelint": "stylelint \"src/**/*.scss\"",
@@ -15,7 +14,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "JSONStream": "^1.3.5",
+    "axios": "^1.6.5",
     "html2canvas": "^1.4.1",
     "quantize": "^1.0.2",
     "react": "^18.2.0",
@@ -25,6 +24,7 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/node": "^20.11.5",
     "@types/quantize": "^1.0.2",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
@@ -39,6 +39,7 @@
     "eslint-plugin-react-refresh": "^0.4.4",
     "husky": "^8.0.3",
     "prettier": "^3.1.0",
+    "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.69.5",
     "stylelint": "^16.0.2",
     "stylelint-config-recommended": "^14.0.0",

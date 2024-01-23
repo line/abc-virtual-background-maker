@@ -21,7 +21,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { backgroundsUri, defaultInputFields } from "~/app.config.json";
 
 import { DragAndDropFile, TextInput } from "@/components";
 import {
@@ -31,7 +30,7 @@ import {
   InputField,
   InputFieldGroup,
 } from "@/constants";
-import { useElementSize, useImageColor } from "@/hooks";
+import { useAppConfiguration, useElementSize, useImageColor } from "@/hooks";
 import { convertHexToRgb } from "@/utils";
 import styles from "./EditableImage.module.scss";
 
@@ -64,14 +63,10 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
     handleFocusInput,
     handleBlurInput,
   } = props;
-  const imageSrc = src
-    ? src.includes("blob:")
-      ? src
-      : `${backgroundsUri}/${src}`
-    : "";
-  const { isDarkImage } = useImageColor(imageSrc);
+  const { isDarkImage } = useImageColor(src);
   const [imageRef, { width: imageWidth }] = useElementSize();
   const [initialColor, setInitialColor] = useState("");
+  const { defaultInputFields } = useAppConfiguration();
 
   useEffect(() => {
     setInitialColor(
@@ -117,8 +112,8 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
         } as CSSProperties
       }
     >
-      {imageSrc ? (
-        <img src={imageSrc} alt="" ref={imageRef} width={1152} height={648} />
+      {src ? (
+        <img src={src} alt="" ref={imageRef} width={1152} height={648} />
       ) : (
         <DragAndDropFile />
       )}

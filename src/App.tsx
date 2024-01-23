@@ -16,7 +16,13 @@
 import { CSSProperties, useEffect, useRef } from "react";
 import { keyColor, title } from "~/app.config.json";
 
-import { DownloadButton, Editor, ImageList, ThemeMenu } from "@/components";
+import {
+  DownloadButton,
+  Editor,
+  ImageList,
+  SyncButton,
+  ThemeMenu,
+} from "@/components";
 import { AppProvider, useMediaQuery, useSnapshot, useTitle } from "@/hooks";
 import styles from "./App.module.scss";
 
@@ -55,7 +61,9 @@ function App() {
         </div>
         <div className={styles.content}>
           <nav className={styles.navigation}>
-            <h2>Select Theme</h2>
+            <h2>
+              Select Theme <SyncButton />
+            </h2>
             <div>
               <ThemeMenu />
               <ImageList />

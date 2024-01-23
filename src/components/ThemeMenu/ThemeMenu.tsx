@@ -13,14 +13,18 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-import { themes } from "~/app.config.json";
 
 import { useAppConfiguration } from "@/hooks";
 import styles from "./ThemeMenu.module.scss";
 
 const ThemeMenu = () => {
-  const { customImages, selectedTheme, handleChangeTheme, handleChangeImage } =
-    useAppConfiguration();
+  const {
+    themes,
+    customImages,
+    selectedTheme,
+    handleChangeTheme,
+    handleChangeImage,
+  } = useAppConfiguration();
 
   const handleChangeDefaultImage = (theme: string) => {
     if (theme === "all") {

@@ -96,7 +96,7 @@ $breakpoint-tablet: 1280px;
 @mixin pressed($key: "light") {
   transition: transform 0.1s cubic-bezier(0.17, 0.55, 0.55, 1);
 
-  &:active {
+  &:not(:disabled):active {
     @if $key == light {
       transform: scale(0.98);
     }

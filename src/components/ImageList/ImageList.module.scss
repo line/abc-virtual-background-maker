@@ -15,16 +15,17 @@
  */
 .images {
   height: calc(100vh - 7.5rem);
-  padding-right: 0.5rem;
-  padding-bottom: 1rem;
+  padding: 0 0.75rem 1rem 0;
+  margin: -0.5rem -0.75rem 0 0;
   overflow: hidden auto;
 
   @include mobile {
     @include scroll(horizontal);
 
     height: auto;
-    padding-bottom: 0;
-    padding-inline: 1rem 1rem;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    padding-inline: 1.25rem 0;
   }
 
   > li {
@@ -40,6 +41,7 @@
     @include mobile {
       width: 7rem;
       height: 3.938rem;
+      margin: 0.25rem;
     }
 
     &.selected {

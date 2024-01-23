@@ -14,7 +14,7 @@
  * under the License.
  */
 import { useEffect, useState } from "react";
-import readmeFile from "~/README.md";
+import readmeFile from "~/CONTRIBUTING.md";
 import Markdown from "react-markdown";
 
 import styles from "./GuideDialog.module.scss";
@@ -45,9 +45,7 @@ const GuideDialog = (props: Props) => {
           <Markdown disallowedElements={["img"]}>{`${markdown}`}</Markdown>
         </div>
         <button type="button" aria-label="Close guide modal" onClick={onClose}>
-          <span className={`material-symbols-outlined ${styles.icon}`}>
-            cancel
-          </span>
+          <span className="material-symbols-outlined">cancel</span>
         </button>
       </div>
     </div>

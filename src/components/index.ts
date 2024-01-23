@@ -29,3 +29,4 @@ export { ToggleOption } from "./ToggleOption";
 export { TextInput } from "./TextInput";
 export { EditableImage } from "./EditableImage";
 export { DragAndDropFile } from "./DragAndDropFile";
+export { SyncButton } from "./SyncButton";

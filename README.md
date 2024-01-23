@@ -16,13 +16,14 @@ And let's say your company is all about that unified look and drops official bac
 
 ## 💡 Features
 
-1. Personalizable Text Overlay - Conveniently add your name, company name, or any other information for Zoom or Teams calls.
-1. Adjustable Fonts and Text Placement - Customize fonts and textfields position according to your preferences.
-1. Organizable Themes - Create collections of background images, similar to folders, allowing for easy management of virtual backgrounds.
-1. Mirror Image Option - Download a reversed version of the image to accommodate video feeds that flip your background horizontally.
-1. Image Upload Capability - Beyond using the preloaded backgrounds, users can also upload their own picture to create personalized virtual backgrounds.
-1. Custom Brand Colors - Select a key color to align UI with your organization's other sites.
-1. No Fuss App - It's a straightforward React web app that doesn't mess around with backend stuff.
+1. Customizable Text Overlay - Conveniently add your name, company name, or any other information for Zoom or Teams calls.
+2. Adjustable Fonts and Text Placement - Customize fonts and textfield position according to your preferences.
+3. Organizable Themes - Create collections of background images, similar to folders, allowing for easy management of virtual backgrounds.
+4. Image Storage Option - Manage your background images on GitHub repo, or load them from local directory.
+5. Mirror Image Option - Download a reversed version of the image to accommodate video feeds that flip your background horizontally.
+6. Image Upload Capability - Beyond using the preloaded backgrounds, users can also upload their own picture to create personalized virtual backgrounds.
+7. Custom Brand Colors - Select a key color to align UI with your organization's other sites.
+8. No Fuss App - It's a straightforward React web app that doesn't mess around with backend stuff.
 
 ## Getting Started
 
@@ -32,31 +33,13 @@ And let's say your company is all about that unified look and drops official bac
 - Build path: `dist`
 - Build Command
 
-  - with local images:
-
   ```bash
-  $ pnpm install && pnpm run read-files && pnpm run build
-  ```
-
-  - with CDN images:
-
-  ```bash
-  $ pnpm install && pnpm run build
+  pnpm install && pnpm run build
   ```
 
 ### 💻 Local Development
 
 1. In the repo folder
-
-   - with local images:
-
-   ```bash
-   pnpm install
-   pnpm run read-files
-   pnpm run dev
-   ```
-
-   - with CDN images:
 
    ```bash
    pnpm install
@@ -80,14 +63,67 @@ docker run -d -p 8080:80 abc-virtual-background-maker
 
 ## 🧞‍♂️ How To Customize
 
-Modify `app.config.json`
+Modify `app.config.json` files.
 
 ![customize-guide](./docs/customize.png)
+
+### 📷 BackgroundsUri
+
+You can choose where to load background images from. Currently, we are supporting filesystem, CDN, and GitHub repo. Below json examples shows how to set `backgroundsUri` value.
+
+- with local images
+
+```json
+  "backgroundsUri": {
+    "type": "filesystem",
+    "path": "./backgrounds"
+  }
+```
+
+- with CDN images
+
+```json
+  "backgroundsUri": {
+    "type": "cdn",
+    "path": "https://your-cdn-host/backgrounds"
+  }
+```
+
+- GitHub repo
+
+Assume that you have a GitHub repo with the following structure;
+
+```
+your-repo-name
+├── backgrounds
+│   ├── (app.config.json) // Without this configuration file, themes and background images are sorted alphabetically.
+│   ├── your-theme-name
+│   │   ├── 01.jpg
+│   │   ├── 02.jpg
+```
+
+Copy the `.env.example` file in this directory to `.env` (which will be ignored by Git), and set token value. [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+
+And the `app.config.json` should be as below;
+
+```json
+  "backgroundsUri": {
+    "type": "github",
+    "path": "https://{your-git-host}/api/v3/repos/{your-repo-owner}/{your-repo-name}/contents/backgrounds"
+  }
+```
 
 ### 🗂️ Themes
 
 1. Add new object value in `app.config.json` 's `themes`. (Value Type `src/constants/theme.ts`)
 2. Set theme name value in new object. (**The theme name should match with the backgrounds subdirectory name.**)
+
+| `Theme`                |                                                                | default |
+| ---------------------- | -------------------------------------------------------------- | ------- |
+| name                   | Theme name should be unique.                                   |         |
+| backgrounds            | Array of images. (Detailed explanation about `Image` is below) |         |
+| inputFields (optional) | Set up an input field group just for this theme                |         |
+| isNew (optional)       | If it's true, new icon shows up next to this theme             | `false` |
 
 ### 🌆 Background Images
 
@@ -95,15 +131,21 @@ Modify `app.config.json`
 
 1. Prepare 16:9 ratio images
 2. Set image file name with rgb color with comma `rrr,ggg,bbb` between two dots, only if you need to set text color. (ex. 01.255,255,255.jpg)
-3. Add background image files into `/backgrounds/**/*`. (or any other directory and set `backgroundsUri` as relative path.)
-4. `pnpm run read-files`
+3. Add background image files into `public/backgrounds/**/*`. (or any other directory and set `backgroundsUri` as relative path.)
+4. `pnpm run build` or `pnpm run dev`
 5. `app.config.json` 's `themes`'s `backgrounds` value will be changed automatically.
 
 - with CDN images
 
 1. Prepare 16:9 ratio images urls
 2. Set `backgroundsUri` in `app.config.json` as base url.
-3. Add `themes`'s `backgrounds` values as object with {src, fontColor?} in `app.config.json` (Value Type `src/constants/image.ts`)
+3. Add `themes`'s `backgrounds` values as an object in `app.config.json`.
+
+| `Image`              |                                                  | default |
+| -------------------- | ------------------------------------------------ | ------- |
+| src                  | contains the path to the image you want to embed |         |
+| fontColor (optional) | Font color in this image                         |         |
+| theme (optional)     | Which theme does it belong to                    |         |
 
 ### 📝 Input Fields
 
@@ -118,7 +160,7 @@ Modify `app.config.json`
 
   | `InputField`          |                                                                              | default |
   | --------------------- | ---------------------------------------------------------------------------- | ------- |
-  | label                 | Label of input (also used as placeholder text)                               |         |
+  | label                 | **Unique** label of input (also used as placeholder text)                    |         |
   | fontSize              | Font size of input                                                           |         |
   | fontStyle             | Typography of input                                                          |         |
   | offset                | Adjusting detail position from origin point. (Detailed explanation is below) |         |
@@ -127,9 +169,9 @@ Modify `app.config.json`
 
 - Offset
 
-  You can locate textfields by adjusting `offset` values. The value `{"x":"0%", "y": "0%"}` starts from Top-Left corner as the origin point.
+  You can locate textfield by adjusting `offset` values. The value `{"x":"0%", "y": "0%"}` starts from Top-Left corner as the origin point.
 
-  Below table shows reference values according to 1920x1080 or 1280x720 images. Use this table as a guide to approximate the placement of your textfields in pixels.
+  Below table shows reference values according to 1920x1080 or 1280x720 images. Use this table as a guide to approximate the placement of your textfield in pixels.
 
   | Pixels  | 20% | 40% | 60%  | 80%  |
   | ------- | --- | --- | ---- | ---- |
@@ -140,22 +182,9 @@ Modify `app.config.json`
 
 - Modify input fields for each theme: Add `themes`'s `inputFields`'s value in `app.config.json`. (It will overwrites `defaultInputFields`.)
 
-  | `Theme`                |                                                                | default |
-  | ---------------------- | -------------------------------------------------------------- | ------- |
-  | name                   | Theme name should be unique.                                   |         |
-  | backgrounds            | Array of images. (Detailed explanation about `Image` is below) |         |
-  | inputFields (optional) | Set up an input field group just for this theme                |         |
-  | isNew (optional)       | If it's true, new icon shows up next to this theme             | `false` |
-
-  | `Image`              |                                                  | default |
-  | -------------------- | ------------------------------------------------ | ------- |
-  | src                  | contains the path to the image you want to embed |         |
-  | fontColor (optional) | Font color in this image                         |         |
-  | theme (optional)     | Which theme does it belong to                    |         |
-
 ### 🪄 Font Styles
 
-**To embed google webfonts,**
+**To embed google web fonts,**
 
 1. Copy the code into the <head> of `index.html`
 
@@ -193,7 +222,7 @@ Modify `app.config.json`
 ]
 ```
 
-**To embed local webfonts,**
+**To embed local web fonts,**
 
 1. Add font file (woff2) in `public`.
 2. Add `@font-face` style in `styles/_font.scss`.
@@ -218,6 +247,79 @@ Modify `fonts`'s `sizes` value in `app.config.json`
 ### 🎨 UI Theme Color
 
 To change the color of the UI elements such as toggles and buttons, you can add the `keyColor` value in `rrr,ggg,bbb` format in the `app.config.json` file. It fosters a consistent design identity for your team.
+
+### Overriding default values per Theme
+
+You may want to override default values for specific theme. We support this feature by placing **another** `app.config.json` file under `backgrounds` directory.
+
+In `app.config.json` structure, `themes` node can be overridden by `app.config.json` file in `backgroundsUri` path. It means, you maintain **root** `app.config.json` for common values, and you can override values for specific theme by placing **another** `app.config.json` under `backgrounds/{theme-name}` directory.
+
+Let say you have `app.config.json` file in `backgrounds` directory, and you want to override `themes` node for `office` theme, you can place `app.config.json` file in `backgrounds/office` directory as below;
+
+```
+your-background-directory
+├── backgrounds
+│   ├── app.config.json
+│   ├── office
+│   │   ├── 01.jpg
+│   │   ├── 02.jpg
+```
+
+With above structure, if you want to override `defaultInputFields` for specific theme, you can add `inputFields` value in `app.config.json` under each `theme` node as below.
+
+```json
+{
+  "themes": [
+    {
+      "name": "office",
+      "inputFields": [
+        {
+          "position": "top-right",
+          "direction": "column",
+          "fields": [
+            {
+              "label": "name",
+              "fontSize": "medium",
+              "fontStyle": "LINE Seed",
+              "offset": {
+                "x": "0%",
+                "y": "0%"
+              },
+              "isRequired": true
+            }
+          ]
+        },
+        {
+          "position": "bottom-left",
+          "fields": [
+            {
+              "label": "Team Name",
+              "fontSize": "medium",
+              "fontStyle": "LINE Seed",
+              "offset": {
+                "x": "0%",
+                "y": "0%"
+              },
+              "isRequired": true,
+              "text": "IT Support Team"
+            }
+          ]
+        }
+      ],
+      "backgrounds": [
+        {
+          "theme": "office",
+          "src": "office/01.jpg"
+        },
+        {
+          "theme": "office",
+          "src": "office/02.jpg"
+        }
+      ]
+    }
+  ]
+}
+```
 
 ## 📚 Libraries and Tools
 

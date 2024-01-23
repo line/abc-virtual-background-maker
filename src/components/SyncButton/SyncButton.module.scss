@@ -13,6 +13,35 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-export { convertRgbToHex } from "./convertRgbToHex";
-export { convertHexToRgb } from "./convertHexToRgb";
-export { readConfigurationFromGithub } from "./readConfigurationFromGithub";
+.button {
+  @include pressed("medium");
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  background-color: var(--fill-quaternary);
+  border-radius: 1.75rem;
+  border: 0.5px solid var(--fill-quaternary);
+
+  :global(.material-symbols-outlined) {
+    font-size: 1.35rem;
+    color: var(--label-primary);
+  }
+
+  &.spin {
+    animation: spin 1s linear infinite;
+    opacity: 1 !important;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+}

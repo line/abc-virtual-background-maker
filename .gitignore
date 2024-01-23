@@ -26,3 +26,6 @@ dist-ssr
 
 # Optional stylelint cache
 .stylelintcache
+
+# env
+.env

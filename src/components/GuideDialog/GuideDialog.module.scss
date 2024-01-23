@@ -39,19 +39,37 @@
     fade-in 0.3s cubic-bezier(0.17, 0.55, 0.55, 1),
     scale-up 0.3s cubic-bezier(0.17, 0.55, 0.55, 1);
 
+  @include mobile {
+    padding: 2.5rem 1.5rem 1.5rem;
+  }
+
   > button {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
 
-    .icon {
-      font-size: 2rem;
+    :global {
+      .material-symbols-outlined {
+        font-size: 2rem;
+        font-variation-settings:
+          "FILL" 1,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
     }
   }
 
   .markdown {
     max-height: calc(100vh - 10.75rem);
     overflow-y: auto;
+    padding-right: 1.5rem;
+    margin-right: -1.5rem;
+
+    @include mobile {
+      padding-right: 1rem;
+      margin-right: -1rem;
+    }
 
     @include font("14", "label-primary");
 

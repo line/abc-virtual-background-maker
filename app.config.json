@@ -1,7 +1,16 @@
 {
-  "title": { "text": "ABC Virtual Background Maker", "logo": "/logo.svg" },
-  "keyColor": { "light": "0,0,0", "dark": "255,255,255" },
-  "backgroundsUri": "backgrounds",
+  "title": {
+    "text": "ABC Virtual Background Maker",
+    "logo": "/logo.svg"
+  },
+  "keyColor": {
+    "light": "0,0,0",
+    "dark": "255,255,255"
+  },
+  "backgroundsUri": {
+    "type": "filesystem",
+    "path": "backgrounds"
+  },
   "fonts": {
     "sizes": {
       "large": "6rem",
@@ -10,7 +19,9 @@
       "small": "3rem",
       "caption": "1.5rem"
     },
-    "styles": ["LINE Seed"]
+    "styles": [
+      "LINE Seed"
+    ]
   },
   "defaultInputFields": [
     {
@@ -21,20 +32,29 @@
           "label": "name",
           "fontSize": "medium",
           "fontStyle": "LINE Seed",
-          "offset": { "x": "0%", "y": "0%" },
+          "offset": {
+            "x": "0%",
+            "y": "0%"
+          },
           "isRequired": true
         },
         {
           "label": "team",
           "fontSize": "small",
           "fontStyle": "LINE Seed",
-          "offset": { "x": "0%", "y": "0%" }
+          "offset": {
+            "x": "0%",
+            "y": "0%"
+          }
         },
         {
           "label": "role",
           "fontSize": "small",
           "fontStyle": "LINE Seed",
-          "offset": { "x": "0%", "y": "0%" }
+          "offset": {
+            "x": "0%",
+            "y": "0%"
+          }
         }
       ]
     }
@@ -43,25 +63,43 @@
     {
       "name": "office",
       "backgrounds": [
-        { "src": "office/01.jpg" },
-        { "src": "office/02.jpg" },
-        { "src": "office/03.jpg" },
-        { "src": "office/04.jpg" },
-        { "src": "office/05.jpg" },
-        { "src": "office/06.jpg" },
-        { "src": "office/07.jpg" },
-        { "src": "office/08.255,255,255.jpg", "fontColor": "255,255,255" }
+        {
+          "theme": "office",
+          "src": "backgrounds/office/01.jpg"
+        },
+        {
+          "theme": "office",
+          "src": "backgrounds/office/02.jpg"
+        },
+        {
+          "theme": "office",
+          "src": "backgrounds/office/03.jpg"
+        },
+        {
+          "theme": "office",
+          "src": "backgrounds/office/04.jpg"
+        },
+        {
+          "theme": "office",
+          "src": "backgrounds/office/05.jpg"
+        },
+        {
+          "theme": "office",
+          "src": "backgrounds/office/06.jpg"
+        },
+        {
+          "theme": "office",
+          "src": "backgrounds/office/07.jpg"
+        },
+        {
+          "theme": "office",
+          "src": "backgrounds/office/08.255,255,255.jpg",
+          "fontColor": "255,255,255"
+        }
       ]
     },
     {
       "name": "nature",
-      "backgrounds": [
-        { "src": "nature/01.jpg" },
-        { "src": "nature/02.jpg" },
-        { "src": "nature/03.jpg" },
-        { "src": "nature/04.jpg" },
-        { "src": "nature/05.jpg" }
-      ],
       "inputFields": [
         {
           "position": "top-right",
@@ -71,20 +109,29 @@
               "label": "name",
               "fontSize": "medium",
               "fontStyle": "LINE Seed",
-              "offset": { "x": "0%", "y": "0%" },
+              "offset": {
+                "x": "0%",
+                "y": "0%"
+              },
               "isRequired": true
             },
             {
               "label": "team",
               "fontSize": "small",
               "fontStyle": "LINE Seed",
-              "offset": { "x": "0%", "y": "0%" }
+              "offset": {
+                "x": "0%",
+                "y": "0%"
+              }
             },
             {
               "label": "role",
               "fontSize": "small",
               "fontStyle": "LINE Seed",
-              "offset": { "x": "0%", "y": "0%" }
+              "offset": {
+                "x": "0%",
+                "y": "0%"
+              }
             }
           ]
         },
@@ -95,24 +142,40 @@
               "label": "Company",
               "fontSize": "medium",
               "fontStyle": "LINE Seed",
-              "offset": { "x": "0%", "y": "0%" },
-              "isRequired": true,
-              "text": "We're Nature Company"
+              "offset": {
+                "x": "0%",
+                "y": "0%"
+              }
             }
           ]
+        }
+      ],
+      "backgrounds": [
+        {
+          "theme": "nature",
+          "src": "backgrounds/nature/01.jpg"
+        },
+        {
+          "theme": "nature",
+          "src": "backgrounds/nature/02.jpg"
+        },
+        {
+          "theme": "nature",
+          "src": "backgrounds/nature/03.jpg"
+        },
+        {
+          "theme": "nature",
+          "src": "backgrounds/nature/04.jpg"
+        },
+        {
+          "theme": "nature",
+          "src": "backgrounds/nature/05.jpg"
         }
       ]
     },
     {
       "name": "texture",
       "isNew": true,
-      "backgrounds": [
-        { "src": "texture/01.jpg" },
-        { "src": "texture/02.jpg" },
-        { "src": "texture/03.jpg" },
-        { "src": "texture/04.jpg" },
-        { "src": "texture/05.jpg" }
-      ],
       "inputFields": [
         {
           "position": "top-center",
@@ -122,14 +185,20 @@
               "label": "name",
               "fontSize": "medium",
               "fontStyle": "LINE Seed",
-              "offset": { "x": "0%", "y": "0%" },
+              "offset": {
+                "x": "0%",
+                "y": "0%"
+              },
               "isRequired": true
             },
             {
               "label": "role",
               "fontSize": "small",
               "fontStyle": "LINE Seed",
-              "offset": { "x": "0%", "y": "0%" }
+              "offset": {
+                "x": "0%",
+                "y": "0%"
+              }
             }
           ]
         },
@@ -140,11 +209,34 @@
               "label": "Company",
               "fontSize": "medium",
               "fontStyle": "LINE Seed",
-              "offset": { "x": "0%", "y": "0%" },
-              "isRequired": true,
-              "text": "We're Texture Company"
+              "offset": {
+                "x": "0%",
+                "y": "0%"
+              }
             }
           ]
+        }
+      ],
+      "backgrounds": [
+        {
+          "theme": "texture",
+          "src": "backgrounds/texture/01.jpg"
+        },
+        {
+          "theme": "texture",
+          "src": "backgrounds/texture/02.jpg"
+        },
+        {
+          "theme": "texture",
+          "src": "backgrounds/texture/03.jpg"
+        },
+        {
+          "theme": "texture",
+          "src": "backgrounds/texture/04.jpg"
+        },
+        {
+          "theme": "texture",
+          "src": "backgrounds/texture/05.jpg"
         }
       ]
     }

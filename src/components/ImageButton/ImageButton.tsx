@@ -14,11 +14,10 @@
  * under the License.
  */
 import { CSSProperties, useEffect, useState } from "react";
-import { backgroundsUri, defaultInputFields, themes } from "~/app.config.json";
 
 import { EditableImage } from "@/components";
 import { InputField, InputFieldGroup, Theme } from "@/constants";
-import { useImageColor } from "@/hooks";
+import { useAppConfiguration, useImageColor } from "@/hooks";
 import styles from "./ImageButton.module.scss";
 
 const DEFAULT_FONT_STYLE = "LINE Seed";
@@ -33,8 +32,8 @@ interface Props {
 
 const ImageButton = (props: Props) => {
   const { theme, src, color, onClick, onClickDelete } = props;
-  const imageSrc = src.includes("blob:") ? src : `${backgroundsUri}/${src}`;
-  const { isDarkImage } = useImageColor(imageSrc);
+  const { themes, defaultInputFields } = useAppConfiguration();
+  const { isDarkImage } = useImageColor(src);
   const textColor = color
     ? color
     : isDarkImage === null
@@ -55,7 +54,7 @@ const ImageButton = (props: Props) => {
 
   useEffect(() => {
     setInputFields(themeInputFields ?? defaultInputFields);
-  }, [theme, themeInputFields]);
+  }, [defaultInputFields, theme, themeInputFields]);
 
   useEffect(() => {
     const initialOptions: Record<string, InputField> = {};
