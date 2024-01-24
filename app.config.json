@@ -1,7 +1,7 @@
 {
   "title": {
     "text": "ABC Virtual Background Maker",
-    "logo": "/logo.svg"
+    "logo": "./logo.svg"
   },
   "keyColor": {
     "light": "0,0,0",
