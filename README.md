@@ -67,7 +67,7 @@ Modify `app.config.json` files.
 
 ![customize-guide](./docs/customize.png)
 
-### 📷 BackgroundsUri
+### 📷 Backgrounds Uri
 
 You can choose where to load background images from. Currently, we are supporting filesystem, CDN, and GitHub repo. Below json examples shows how to set `backgroundsUri` value.
 
@@ -89,22 +89,22 @@ You can choose where to load background images from. Currently, we are supportin
   }
 ```
 
-- GitHub repo
+- with GitHub repository
 
-Assume that you have a GitHub repo with the following structure;
+You can manage background images using a GitHub repository. Create a GitHub repository and suppose that you have a repository with the following structure:
 
 ```
 your-repo-name
 ├── backgrounds
-│   ├── (app.config.json) // Without this configuration file, themes and background images are sorted alphabetically.
+│   ├── (app.config.json) // Optional. Without this configuration file, themes and background images are sorted alphabetically.
 │   ├── your-theme-name
 │   │   ├── 01.jpg
 │   │   ├── 02.jpg
 ```
 
-Copy the `.env.example` file in this directory to `.env` (which will be ignored by Git), and set token value. [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+Rename `.env.example` file to `.env` (which will be ignored by Git), and set generated [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) value.
 
-And the `app.config.json` should be as below;
+The `app.config.json` should be as below;
 
 ```json
   "backgroundsUri": {
