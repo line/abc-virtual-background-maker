@@ -22,7 +22,7 @@ And let's say your company is all about that unified look and drops official bac
 4. Image Storage Option - Manage your background images on GitHub repo, or load them from local directory.
 5. Mirror Image Option - Download a reversed version of the image to accommodate video feeds that flip your background horizontally.
 6. Image Upload Capability - Beyond using the preloaded backgrounds, users can also upload their own picture to create personalized virtual backgrounds.
-7. Custom Brand Colors - Select a key color to align UI with your organization's other sites.
+7. Customizable Appearance - Change the UI with your organization's key color and name for a consistent look across your sites.
 8. No Fuss App - It's a straightforward React web app that doesn't mess around with backend stuff.
 
 ## Getting Started
