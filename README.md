@@ -52,6 +52,11 @@ And let's say your company is all about that unified look and drops official bac
    http://localhost:5173/
    ```
 
+### 🐙 Github Pages Deployment
+
+You can deploy directly from your GitHub repository using [GitHub Pages](https://pages.github.com/) at `Setting > Pages > Github Actions` menu.
+Check our deployment workflow with [GitHub Actions](https://docs.github.com/en/actions) at [.github/workflows/deploy.yml](https://github.com/line/abc-virtual-background-maker/blob/main/.github/workflows/deploy.yml)
+
 ### 🐳 Container Deployment
 
 We offer a [Dockerfile](Dockerfile) to help you get started quickly. You can execute the Docker commands as follows. It will allow you to access via 8080 port.
