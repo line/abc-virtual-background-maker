@@ -54,11 +54,8 @@ And let's say your company is all about that unified look and drops official bac
 
 ### 🐙 Github Pages Deployment
 
-You can deploy directly from your GitHub repository using [GitHub Pages](https://pages.github.com/) with just a GitHub account. (If the repository is private, either upgrade your account or make the repository public to enable Pages.)
-
-`Setting > Pages > Github Actions`
-
-You can automate development workflows with [GitHub Actions](https://docs.github.com/en/actions). [.github/workflows/deploy.yml](https://github.com/line/abc-virtual-background-maker/blob/main/.github/workflows/deploy.yml)
+You can deploy directly from your GitHub repository using [GitHub Pages](https://pages.github.com/) at `Setting > Pages > Github Actions` menu.
+Check our deployment workflow with [GitHub Actions](https://docs.github.com/en/actions) at [.github/workflows/deploy.yml](https://github.com/line/abc-virtual-background-maker/blob/main/.github/workflows/deploy.yml)
 
 ### 🐳 Container Deployment
 
