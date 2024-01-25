@@ -2,7 +2,7 @@
 
 # ABC Virtual Background Maker
 
-A standalone frontend app to generate and download zoom background image with text.
+A lightweight frontend app to generate and download virtual background image with text.
 
 ![screenshot-of-abc-virtual-background-maker](./docs/screenshot.png)
 
