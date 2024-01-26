@@ -51,7 +51,7 @@ function copyBackgroundsForFileSystem() {
       const filteredFileContentsArray = fileContentsArray.filter(
         ({ theme: fileTheme }) => fileTheme === theme,
       );
-      config.themes[index].backgrounds = filteredFileContentsArray.map(
+      config.themes[index]["backgrounds"] = filteredFileContentsArray.map(
         ({ src, fontColor }) => (fontColor ? { src, fontColor } : { src }),
       );
     });
