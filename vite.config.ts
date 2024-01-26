@@ -40,6 +40,7 @@ function copyBackgroundsForFileSystem() {
     config.backgroundsUri.type === "filesystem" &&
     config.backgroundsUri.path
   ) {
+    const dir = path.resolve();
     const sourceDirectory = config.backgroundsUri.path;
     const targetDirectory = "dist";
     const order = config.themes.map(({ name }) => name);
