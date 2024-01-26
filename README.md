@@ -136,9 +136,9 @@ The `app.config.json` should be as below;
 
 1. Prepare 16:9 ratio images
 2. Set image file name with rgb color with comma `rrr,ggg,bbb` between two dots, only if you need to set text color. (ex. 01.255,255,255.jpg)
-3. Add background image files into `public/backgrounds/**/*`. (or any other directory and set `backgroundsUri` as relative path.)
+3. Add background image files into `backgrounds/**/*`. (or any other directory and set `backgroundsUri` as relative path.)
 4. `pnpm run build` or `pnpm run dev`
-5. `app.config.json` 's `themes`'s `backgrounds` value will be changed automatically.
+5. `output.config.json` 's `themes`'s `backgrounds` value will be changed automatically.
 
 - with CDN images
 
@@ -307,16 +307,6 @@ With above structure, let say you want to override `themes` node for `office` th
               "text": "IT Support Team"
             }
           ]
-        }
-      ],
-      "backgrounds": [
-        {
-          "theme": "office",
-          "src": "office/01.jpg"
-        },
-        {
-          "theme": "office",
-          "src": "office/02.jpg"
         }
       ]
     }

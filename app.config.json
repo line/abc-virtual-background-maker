@@ -19,9 +19,7 @@
       "small": "3rem",
       "caption": "1.5rem"
     },
-    "styles": [
-      "LINE Seed"
-    ]
+    "styles": ["LINE Seed"]
   },
   "defaultInputFields": [
     {
@@ -61,42 +59,7 @@
   ],
   "themes": [
     {
-      "name": "office",
-      "backgrounds": [
-        {
-          "theme": "office",
-          "src": "backgrounds/office/01.jpg"
-        },
-        {
-          "theme": "office",
-          "src": "backgrounds/office/02.jpg"
-        },
-        {
-          "theme": "office",
-          "src": "backgrounds/office/03.jpg"
-        },
-        {
-          "theme": "office",
-          "src": "backgrounds/office/04.jpg"
-        },
-        {
-          "theme": "office",
-          "src": "backgrounds/office/05.jpg"
-        },
-        {
-          "theme": "office",
-          "src": "backgrounds/office/06.jpg"
-        },
-        {
-          "theme": "office",
-          "src": "backgrounds/office/07.jpg"
-        },
-        {
-          "theme": "office",
-          "src": "backgrounds/office/08.255,255,255.jpg",
-          "fontColor": "255,255,255"
-        }
-      ]
+      "name": "office"
     },
     {
       "name": "nature",
@@ -149,28 +112,6 @@
             }
           ]
         }
-      ],
-      "backgrounds": [
-        {
-          "theme": "nature",
-          "src": "backgrounds/nature/01.jpg"
-        },
-        {
-          "theme": "nature",
-          "src": "backgrounds/nature/02.jpg"
-        },
-        {
-          "theme": "nature",
-          "src": "backgrounds/nature/03.jpg"
-        },
-        {
-          "theme": "nature",
-          "src": "backgrounds/nature/04.jpg"
-        },
-        {
-          "theme": "nature",
-          "src": "backgrounds/nature/05.jpg"
-        }
       ]
     },
     {
@@ -215,28 +156,6 @@
               }
             }
           ]
-        }
-      ],
-      "backgrounds": [
-        {
-          "theme": "texture",
-          "src": "backgrounds/texture/01.jpg"
-        },
-        {
-          "theme": "texture",
-          "src": "backgrounds/texture/02.jpg"
-        },
-        {
-          "theme": "texture",
-          "src": "backgrounds/texture/03.jpg"
-        },
-        {
-          "theme": "texture",
-          "src": "backgrounds/texture/04.jpg"
-        },
-        {
-          "theme": "texture",
-          "src": "backgrounds/texture/05.jpg"
         }
       ]
     }

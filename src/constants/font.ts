@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-import config from "~/app.config.json";
+import config from "~/output.config.json";
 
 export const FontSizes: Record<string, string> = {} as const;
 Object.keys(config.fonts.sizes).forEach(

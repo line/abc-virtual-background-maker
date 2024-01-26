@@ -51,16 +51,22 @@ function copyBackgroundsForFileSystem() {
       const filteredFileContentsArray = fileContentsArray.filter(
         ({ theme: fileTheme }) => fileTheme === theme,
       );
-      config.themes[index].backgrounds = filteredFileContentsArray;
+      config.themes[index]["backgrounds"] = filteredFileContentsArray.map(
+        ({ src, fontColor }) => (fontColor ? { src, fontColor } : { src }),
+      );
     });
 
-    const configJsonPath = path.join(dir, "app.config.json");
+    const configJsonPath = path.join(dir, "output.config.json");
     fs.writeFileSync(configJsonPath, JSON.stringify(config, null, 2));
 
     return copy({
       targets: [{ src: sourceDirectory, dest: targetDirectory }],
       hook: "writeBundle",
     });
+  } else {
+    const dir = path.resolve();
+    const configJsonPath = path.join(dir, "output.config.json");
+    fs.writeFileSync(configJsonPath, JSON.stringify(config, null, 2));
   }
 }
 
@@ -76,18 +82,22 @@ function readFilesRecursively(dir) {
 
     sortedFiles.forEach((file) => {
       const filePath = path.join(dir, file);
+      const theme = dir.replace(
+        path.join(config.backgroundsUri.path, path.sep),
+        "",
+      );
 
       if (fs.statSync(filePath).isDirectory()) {
         readFiles(filePath);
       } else if (isImageFile(filePath)) {
         const item = file.split(".")?.[2]
           ? {
-              theme: dir.replace(`${config.backgroundsUri.path}/`, ""),
+              theme,
               src: filePath,
               fontColor: file.split(".")[1],
             }
           : {
-              theme: dir.replace(`${config.backgroundsUri.path}/`, ""),
+              theme,
               src: filePath,
             };
         fileContentsArray.push(item);

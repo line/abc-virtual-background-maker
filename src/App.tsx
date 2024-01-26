@@ -14,7 +14,7 @@
  * under the License.
  */
 import { CSSProperties, useEffect, useRef } from "react";
-import { keyColor, title } from "~/app.config.json";
+import { keyColor, title } from "~/output.config.json";
 
 import {
   DownloadButton,

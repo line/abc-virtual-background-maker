@@ -10,6 +10,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "stylelint": "stylelint \"src/**/*.scss\"",
     "typecheck": "tsc --noEmit",
+    "configcheck": "test -f output.config.json || cp app.config.json output.config.json",
     "format": "prettier --check \"./src/**/*.{js,cjs,mjs,ts,tsx,md,json}\"",
     "prepare": "husky install"
   },

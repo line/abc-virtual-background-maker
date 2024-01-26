@@ -11,6 +11,9 @@ node_modules
 dist
 dist-ssr
 *.local
+vite.config.ts.*
+
+output.config.json
 
 # Editor directories and files
 .vscode/*
