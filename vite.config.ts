@@ -51,10 +51,12 @@ function copyBackgroundsForFileSystem() {
       const filteredFileContentsArray = fileContentsArray.filter(
         ({ theme: fileTheme }) => fileTheme === theme,
       );
-      config.themes[index].backgrounds = filteredFileContentsArray;
+      config.themes[index].backgrounds = filteredFileContentsArray.map(
+        ({ src, fontColor }) => (fontColor ? { src, fontColor } : { src }),
+      );
     });
 
-    const configJsonPath = path.join(dir, "app.config.json");
+    const configJsonPath = path.join(dir, "output.config.json");
     fs.writeFileSync(configJsonPath, JSON.stringify(config, null, 2));
 
     return copy({

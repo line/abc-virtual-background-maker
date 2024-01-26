@@ -23,6 +23,7 @@ import {
   useState,
 } from "react";
 import config from "~/app.config.json";
+import outputConfig from "~/output.config.json";
 import axios, { AxiosError } from "axios";
 
 import { Image, InputFieldGroup, Theme } from "@/constants";
@@ -73,7 +74,6 @@ export const AppProvider = (props: PropsWithChildren) => {
   const { defaultInputFields } = config;
   const [themes, setThemes] = useState<Array<Theme>>([]);
   const [selectedImage, setSelectedImage] = useState<Image>({
-    theme: "",
     src: "",
   });
   const [selectedTheme, setSelectedTheme] = useState("all");
@@ -84,9 +84,12 @@ export const AppProvider = (props: PropsWithChildren) => {
     const lowerCasedType = type.trim().toLowerCase();
     switch (lowerCasedType) {
       case "filesystem":
+        setThemes(outputConfig.themes as Array<Theme>);
+        setSelectedImage(outputConfig.themes[0].backgrounds[0]);
+        break;
       case "cdn":
         setThemes(config.themes as Array<Theme>);
-        setSelectedImage(config.themes[0].backgrounds[0]);
+        setSelectedImage((config.themes[0] as Theme)?.backgrounds[0] ?? []);
         break;
       case "github":
         try {
