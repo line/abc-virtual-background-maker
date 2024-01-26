@@ -2,7 +2,7 @@
 
 # ABC Virtual Background Maker
 
-A standalone frontend app to generate and download zoom background image with text.
+A lightweight frontend app to generate and download virtual background image with text.
 
 ![screenshot-of-abc-virtual-background-maker](./docs/screenshot.png)
 
@@ -22,7 +22,7 @@ And let's say your company is all about that unified look and drops official bac
 4. Image Storage Option - Manage your background images on GitHub repo, or load them from local directory.
 5. Mirror Image Option - Download a reversed version of the image to accommodate video feeds that flip your background horizontally.
 6. Image Upload Capability - Beyond using the preloaded backgrounds, users can also upload their own picture to create personalized virtual backgrounds.
-7. Custom Brand Colors - Select a key color to align UI with your organization's other sites.
+7. Customizable Appearance - Change the UI with your organization's key color and name for a consistent look across your sites.
 8. No Fuss App - It's a straightforward React web app that doesn't mess around with backend stuff.
 
 ## Getting Started
@@ -52,7 +52,7 @@ And let's say your company is all about that unified look and drops official bac
    http://localhost:5173/
    ```
 
-### 🐙 Github Pages Deployment
+### 🐙 GitHub Pages Deployment
 
 You can deploy directly from your GitHub repository using [GitHub Pages](https://pages.github.com/) at `Setting > Pages > Github Actions` menu.
 Check our deployment workflow with [GitHub Actions](https://docs.github.com/en/actions) at [.github/workflows/deploy.yml](https://github.com/line/abc-virtual-background-maker/blob/main/.github/workflows/deploy.yml)
@@ -96,10 +96,10 @@ You can choose where to load background images from. Currently, we are supportin
 
 - with GitHub repository
 
-You can manage background images using a GitHub repository. Create a GitHub repository and suppose that you have a repository with the following structure:
+You can manage background images using a GitHub repository. Suppose that you created a repository with the following structure:
 
 ```
-your-repo-name
+your-background-repo
 ├── backgrounds
 │   ├── (app.config.json) // Optional. Without this configuration file, themes and background images are sorted alphabetically.
 │   ├── your-theme-name
@@ -257,9 +257,7 @@ To change the color of the UI elements such as toggles and buttons, you can add 
 
 You may want to override default values for specific theme. We support this feature by placing **another** `app.config.json` file under `backgrounds` directory.
 
-In `app.config.json` structure, `themes` node can be overridden by `app.config.json` file in `backgroundsUri` path. It means, you maintain **root** `app.config.json` for common values, and you can override values for specific theme by placing **another** `app.config.json` under `backgrounds/{theme-name}` directory.
-
-Let say you have `app.config.json` file in `backgrounds` directory, and you want to override `themes` node for `office` theme, you can place `app.config.json` file in `backgrounds/office` directory as below;
+In `app.config.json` structure, `themes` node can be overridden by `app.config.json` file in `backgroundsUri` path. It means, you maintain **root** `app.config.json` for common values, and you can override values for specific theme by placing **another** `app.config.json` under `backgrounds` directory as below;
 
 ```
 your-background-directory
@@ -270,7 +268,7 @@ your-background-directory
 │   │   ├── 02.jpg
 ```
 
-With above structure, if you want to override `defaultInputFields` for specific theme, you can add `inputFields` value in `app.config.json` under each `theme` node as below.
+With above structure, let say you want to override `themes` node for `office` theme. If you want to override `defaultInputFields` for specific theme, you can add `inputFields` value in `app.config.json` under each `theme` node as below.
 
 ```json
 {
