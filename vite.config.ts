@@ -82,18 +82,22 @@ function readFilesRecursively(dir) {
 
     sortedFiles.forEach((file) => {
       const filePath = path.join(dir, file);
+      const theme = dir.replace(
+        path.join(config.backgroundsUri.path, path.sep),
+        "",
+      );
 
       if (fs.statSync(filePath).isDirectory()) {
         readFiles(filePath);
       } else if (isImageFile(filePath)) {
         const item = file.split(".")?.[2]
           ? {
-              theme: dir.replace(`${config.backgroundsUri.path}/`, ""),
+              theme,
               src: filePath,
               fontColor: file.split(".")[1],
             }
           : {
-              theme: dir.replace(`${config.backgroundsUri.path}/`, ""),
+              theme,
               src: filePath,
             };
         fileContentsArray.push(item);
