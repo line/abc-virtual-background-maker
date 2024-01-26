@@ -40,7 +40,6 @@ function copyBackgroundsForFileSystem() {
     config.backgroundsUri.type === "filesystem" &&
     config.backgroundsUri.path
   ) {
-    const dir = path.resolve();
     const sourceDirectory = config.backgroundsUri.path;
     const targetDirectory = "dist";
     const order = config.themes.map(({ name }) => name);
@@ -63,6 +62,10 @@ function copyBackgroundsForFileSystem() {
       targets: [{ src: sourceDirectory, dest: targetDirectory }],
       hook: "writeBundle",
     });
+  } else {
+    const dir = path.resolve();
+    const configJsonPath = path.join(dir, "output.config.json");
+    fs.writeFileSync(configJsonPath, JSON.stringify(config, null, 2));
   }
 }
 
