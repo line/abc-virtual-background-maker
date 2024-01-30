@@ -68,7 +68,7 @@ docker run -d -p 8080:80 abc-virtual-background-maker
 
 ## 🧞‍♂️ How To Customize
 
-Modify `app.config.json` files.
+Modify `app.config.json` file.
 
 ![customize-guide](./docs/customize.png)
 
@@ -189,7 +189,7 @@ The `app.config.json` should be as below;
 
 ### 🪄 Font Styles
 
-**To embed google web fonts,**
+**To embed 19 Google web fonts (total 20 fonts!),**
 
 1. Copy the code into the <head> of `index.html`
 
