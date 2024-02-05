@@ -16,6 +16,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { Alert, AlertButton } from "@/components";
 import { useAppConfiguration } from "@/hooks";
 import styles from "./DragAndDropFile.module.scss";
 
@@ -24,6 +25,7 @@ const DragAndDropFile = () => {
     useAppConfiguration();
   const dragRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleDragIn = useCallback((e: DragEvent): void => {
     e.preventDefault();
@@ -51,7 +53,11 @@ const DragAndDropFile = () => {
       e.preventDefault();
       e.stopPropagation();
 
-      handleDropCustomImages(e);
+      try {
+        handleDropCustomImages(e);
+      } catch (e) {
+        setShowAlert(true);
+      }
       setIsDragging(false);
     },
     [handleDropCustomImages],
@@ -94,6 +100,12 @@ const DragAndDropFile = () => {
         accept="image/*"
         ref={dragRef}
       />
+      {showAlert && (
+        <Alert onClose={() => setShowAlert(false)}>
+          Only images can be uploaded.
+          <AlertButton onClick={() => setShowAlert(false)}>Confirm</AlertButton>
+        </Alert>
+      )}
     </label>
   );
 };

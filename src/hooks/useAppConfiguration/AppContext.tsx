@@ -107,11 +107,14 @@ export const AppProvider = (props: PropsWithChildren) => {
   };
 
   const handleDropCustomImages = (event: DragEvent) => {
-    const src = URL.createObjectURL(
-      ((event.dataTransfer as DataTransfer).files as FileList)[0],
-    );
-    setCustomImages([...customImages, { src, theme: "custom" }]);
+    const file = ((event.dataTransfer as DataTransfer).files as FileList)[0];
+    const src = URL.createObjectURL(file);
 
+    if (file.type.includes("image")) {
+      setCustomImages([...customImages, { src, theme: "custom" }]);
+    } else {
+      throw new Error("FileNotAcceptable");
+    }
     return () => URL.revokeObjectURL(src);
   };
 
