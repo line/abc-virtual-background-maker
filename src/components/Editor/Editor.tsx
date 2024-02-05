@@ -358,7 +358,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                   onClick={handleReset}
                   className={styles.reset}
                 >
-                  Reset Image
+                  Reset Style
                 </TextButton>
               </li>
             </ul>
