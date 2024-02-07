@@ -45,6 +45,7 @@ import {
 } from "@/constants";
 import { useAppConfiguration, useImageColor } from "@/hooks";
 import { IconGithub } from "@/icons";
+import locales from "@/locales/common.json";
 import { convertRgbToHex } from "@/utils";
 import styles from "./Editor.module.scss";
 
@@ -238,10 +239,10 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
             icon={<span className="material-symbols-outlined">help</span>}
             onClick={() => setGuideVisible(true)}
           >
-            How To Contribute
+            {locales["button"]["contribute"]}
           </TextButton>
           <TextButton icon={<IconGithub />} onClick={handleClickGithub}>
-            Github
+            {locales["button"]["github"]}
           </TextButton>
         </div>
       </div>
@@ -255,7 +256,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
               tabIndex={0}
             >
               <li className={styles.custom}>
-                <strong>Font</strong>
+                <strong>{locales["option"]["font"]}</strong>
                 <Select
                   defaultValue={inputOptions?.[focusedInput]?.fontStyle}
                   value={inputOptions?.[focusedInput]?.fontStyle}
@@ -267,7 +268,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                 />
               </li>
               <li className={styles.custom}>
-                <strong>Size</strong>
+                <strong>{locales["option"]["size"]}</strong>
                 <Select
                   defaultValue={inputOptions?.[focusedInput]?.fontSize}
                   value={inputOptions?.[focusedInput]?.fontSize}
@@ -281,7 +282,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                 />
               </li>
               <li className={styles.custom}>
-                <strong>Color</strong>
+                <strong>{locales["option"]["color"]}</strong>
                 <ColorPicker
                   defaultValue={
                     inputOptions?.[focusedInput]?.fontColor ??
@@ -291,14 +292,14 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                 />
               </li>
               <li className={styles.custom}>
-                <strong>Opacity</strong>
+                <strong>{locales["option"]["opacity"]}</strong>
                 <OpacityRange
                   defaultValue={inputOptions?.[focusedInput]?.opacity}
                   onChange={(e) => handleChangeOpacity(Number(e.target.value))}
                 />
               </li>
               <li className={styles.custom}>
-                <strong>Alignment</strong>
+                <strong>{locales["option"]["alignment"]}</strong>
                 <AlignSelect
                   defaultValue={
                     inputOptions?.[focusedInput]?.alignment ?? "left"
@@ -319,7 +320,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
           </>
         ) : (
           <>
-            <h3>Text Option</h3>
+            <h3>{locales["option"]["text"]}</h3>
             {inputFields.map(({ fields }, index) => (
               <ul key={index}>
                 {fields.map(({ label, isRequired }, index) => (
@@ -334,14 +335,14 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                 ))}
               </ul>
             ))}
-            <h3>Image Option</h3>
+            <h3>{locales["option"]["image"]}</h3>
             <ul>
               <li>
                 <ToggleOption
                   label={
                     <>
                       <span className="material-symbols-outlined">flip</span>
-                      Horizontal Flip
+                      {locales["option"]["flip"]}
                     </>
                   }
                   isSelected={isImageFlip}
@@ -358,7 +359,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                   onClick={handleReset}
                   className={styles.reset}
                 >
-                  Reset Style
+                  {locales["option"]["reset"]}
                 </TextButton>
               </li>
             </ul>

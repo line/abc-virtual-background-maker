@@ -25,6 +25,7 @@ import {
 } from "@/components";
 import { Config } from "@/constants/config";
 import { AppProvider, useMediaQuery, useSnapshot, useTitle } from "@/hooks";
+import locales from "@/locales/common.json";
 import styles from "./App.module.scss";
 
 function App() {
@@ -64,7 +65,7 @@ function App() {
         <div className={styles.content}>
           <nav className={styles.navigation}>
             <h2>
-              Select Theme <SyncButton />
+              {locales["title"]["theme"]} <SyncButton />
             </h2>
             <div>
               <ThemeMenu />
