@@ -15,16 +15,18 @@
  */
 import config from "~/output.config.json";
 
+import { Config } from "@/constants/config";
+
+const { fonts } = config as Config;
+
 export const FontSizes: Record<string, string> = {} as const;
-Object.keys(config.fonts.sizes).forEach(
-  (size) =>
-    (FontSizes[size] =
-      config.fonts.sizes[size as keyof typeof config.fonts.sizes]),
+Object.keys(fonts.sizes).forEach(
+  (size) => (FontSizes[size] = fonts.sizes[size as keyof typeof fonts.sizes]),
 );
 export type FontSize = keyof typeof FontSizes;
 
 export const Fonts: Record<string, string> = {} as const;
-config.fonts.styles.forEach((font) => (Fonts[font] = font));
+fonts.styles.forEach((font) => (Fonts[font] = font));
 export type Font = keyof typeof Fonts;
 
 export const Alignments = {

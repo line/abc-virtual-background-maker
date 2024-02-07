@@ -26,6 +26,7 @@ import config from "~/output.config.json";
 import axios, { AxiosError } from "axios";
 
 import { Image, InputFieldGroup, Theme } from "@/constants";
+import { Config } from "@/constants/config";
 import { readConfigurationFromGithub } from "@/utils";
 
 // Create a custom axios instance with default headers
@@ -69,8 +70,7 @@ export const AppContext = createContext<ContextProps>({
 
 export const AppProvider = (props: PropsWithChildren) => {
   const { children } = props;
-  const { backgroundsUri } = config;
-  const { defaultInputFields } = config;
+  const { backgroundsUri, defaultInputFields } = config as Config;
   const [themes, setThemes] = useState<Array<Theme>>([]);
   const [selectedImage, setSelectedImage] = useState<Image>({
     src: "",
