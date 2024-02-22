@@ -31,6 +31,7 @@ import {
   Select,
   TextButton,
   ToggleOption,
+  Tooltip,
 } from "@/components";
 import {
   Alignment,
@@ -116,12 +117,16 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
     const initialOptions: Record<string, InputField> = {};
     inputFields.map(({ fields }) => {
       fields.map(
-        ({ label, fontSize, fontStyle = DEFAULT_FONT_STYLE, text }, index) => {
+        (
+          { label, fontSize, fontStyle = DEFAULT_FONT_STYLE, text, tooltip },
+          index,
+        ) => {
           initialOptions[label] = {
             label,
             fontStyle,
             fontSize,
             text,
+            tooltip,
             isVisible: true,
             opacity: index === 0 ? 100 : 60,
           };
@@ -370,6 +375,14 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
         isVisible={guideVisible}
         onClose={() => setGuideVisible(false)}
       />
+      <Tooltip
+        visible={
+          Boolean(focusedInput) &&
+          Boolean(inputOptions?.[focusedInput]?.tooltip)
+        }
+      >
+        {inputOptions?.[focusedInput]?.tooltip}
+      </Tooltip>
     </>
   );
 });

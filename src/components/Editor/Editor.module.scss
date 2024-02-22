@@ -146,11 +146,11 @@
 
 .side {
   width: 22.5rem;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 1.5rem 0.5rem;
 
   @include mobile {
     width: 100%;
-    padding-top: 0;
+    padding: 0 1.5rem 1.5rem;
   }
 
   h3 {
