@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -45,3 +45,31 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+  # Tagging job
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
+      - name: Read packages.json
+        run: |
+          echo "PACKAGE_JSON=$(jq -c . < package.json)" >> $GITHUB_ENV
+      - name: Generate tag version (headver)
+        run: |
+          VERSION_PREFIX="v"
+          VERSION_HEAD=$(cut -d '.' -f 1 <<< ${{ fromJson(env.PACKAGE_JSON).version }})
+          VERSION_YEAR=$(date +%Y | cut -c 3-4)
+          VERSION_WEEK=$(date +%U)
+          VERSION_BUILD=${{github.run_number}}
+          NEW_TAG="${VERSION_PREFIX}${VERSION_HEAD}.${VERSION_YEAR}${VERSION_WEEK}.${VERSION_BUILD}"
+          echo "Generated new tag: $NEW_TAG"
+          echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
+      - name: Push Git Tag
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git tag $NEW_TAG
+          git push origin $NEW_TAG
