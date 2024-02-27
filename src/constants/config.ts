@@ -29,6 +29,7 @@ export interface Config {
     type: string;
     path: string;
   };
+  contributeGuide: string;
   fonts: {
     sizes: Record<string, string>;
     styles: Array<string>;

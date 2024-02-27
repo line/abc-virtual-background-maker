@@ -17,7 +17,7 @@ import config from "~/output.config.json";
 
 import { Config } from "@/constants/config";
 
-const { fonts } = config as Config;
+const { fonts } = config as unknown as Config;
 
 export const FontSizes: Record<string, string> = {} as const;
 Object.keys(fonts.sizes).forEach(

@@ -29,7 +29,7 @@ import locales from "@/locales/common.json";
 import styles from "./App.module.scss";
 
 function App() {
-  const { keyColor, title } = config as Config;
+  const { keyColor, title } = config as unknown as Config;
   const imageAreaRef = useRef<HTMLDivElement>(null);
   const { saveImage, loading } = useSnapshot(imageAreaRef);
   const { logo, text } = title;

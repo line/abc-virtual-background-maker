@@ -11,6 +11,7 @@
     "type": "filesystem",
     "path": "backgrounds"
   },
+  "contributeGuide": "./CONTRIBUTING.md",
   "fonts": {
     "sizes": {
       "large": "6rem",

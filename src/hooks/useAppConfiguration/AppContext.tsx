@@ -70,7 +70,11 @@ export const AppContext = createContext<ContextProps>({
 
 export const AppProvider = (props: PropsWithChildren) => {
   const { children } = props;
-  const { backgroundsUri, defaultInputFields } = config as Config;
+  const {
+    backgroundsUri,
+    defaultInputFields,
+    themes: configThemes,
+  } = config as unknown as Config;
   const [themes, setThemes] = useState<Array<Theme>>([]);
   const [selectedImage, setSelectedImage] = useState<Image>({
     src: "",
@@ -79,32 +83,39 @@ export const AppProvider = (props: PropsWithChildren) => {
   const [customImages, setCustomImages] = useState<Array<Image>>([]);
   const [isSyncing, setIsSyncing] = useState(false);
 
-  const resetThemes = async (path: string, type: string) => {
-    const lowerCasedType = type.trim().toLowerCase();
-    switch (lowerCasedType) {
-      case "filesystem":
-      case "cdn":
-        setThemes(config.themes as Array<Theme>);
-        setSelectedImage((config.themes[0] as Theme)?.backgrounds[0] ?? []);
-        break;
-      case "github":
-        try {
-          const themes = await readConfigurationFromGithub(githubAxios, path);
-          if (themes) {
-            setThemes(themes);
-            setSelectedImage(themes[0].backgrounds[0]);
-          }
-        } catch (error) {
-          console.error(
-            `Error reading configuration from github:`,
-            (error as AxiosError).message,
+  const resetThemes = useCallback(
+    async (path: string, type: string) => {
+      const lowerCasedType = type.trim().toLowerCase();
+      switch (lowerCasedType) {
+        case "filesystem":
+        case "cdn":
+          setThemes(
+            configThemes.filter(
+              ({ isHidden = false }) => !isHidden,
+            ) as Array<Theme>,
           );
-        }
-        break;
-      default:
-        console.warn("Unknown type:", type);
-    }
-  };
+          setSelectedImage((configThemes[0] as Theme)?.backgrounds[0] ?? []);
+          break;
+        case "github":
+          try {
+            const themes = await readConfigurationFromGithub(githubAxios, path);
+            if (themes) {
+              setThemes(themes.filter(({ isHidden = false }) => !isHidden));
+              setSelectedImage(themes[0].backgrounds[0]);
+            }
+          } catch (error) {
+            console.error(
+              `Error reading configuration from github:`,
+              (error as AxiosError).message,
+            );
+          }
+          break;
+        default:
+          console.warn("Unknown type:", type);
+      }
+    },
+    [configThemes],
+  );
 
   const handleDropCustomImages = (event: DragEvent) => {
     const file = ((event.dataTransfer as DataTransfer).files as FileList)[0];
@@ -147,11 +158,11 @@ export const AppProvider = (props: PropsWithChildren) => {
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, [backgroundsUri]);
+  }, [backgroundsUri, resetThemes]);
 
   useEffect(() => {
     backgroundsUri && resetThemes(backgroundsUri.path, backgroundsUri.type);
-  }, [backgroundsUri]);
+  }, [backgroundsUri, resetThemes]);
 
   useEffect(() => {
     if (selectedTheme === "custom") {

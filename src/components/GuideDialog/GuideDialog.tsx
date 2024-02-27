@@ -14,9 +14,10 @@
  * under the License.
  */
 import { useEffect, useState } from "react";
-import readmeFile from "~/CONTRIBUTING.md";
+import config from "~/app.config.json";
 import Markdown from "react-markdown";
 
+import { Config } from "@/constants/config";
 import styles from "./GuideDialog.module.scss";
 
 interface Props {
@@ -26,13 +27,14 @@ interface Props {
 
 const GuideDialog = (props: Props) => {
   const { isVisible, onClose } = props;
+  const { contributeGuide } = config as unknown as Config;
   const [markdown, setMarkdown] = useState("");
 
   useEffect(() => {
-    fetch(readmeFile)
+    fetch(contributeGuide)
       .then((response) => response.text())
       .then(setMarkdown);
-  }, []);
+  }, [contributeGuide]);
 
   if (!isVisible) {
     return <></>;
