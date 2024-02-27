@@ -13,8 +13,13 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import html2Canvas from "html2canvas";
+
+const size = {
+  width: 1152,
+  height: 648,
+};
 
 const useSnapshot = (dom: React.RefObject<HTMLElement>) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,8 +28,17 @@ const useSnapshot = (dom: React.RefObject<HTMLElement>) => {
     async (fileName: string = "image.png") => {
       if (!loading && dom.current) {
         setLoading(true);
-
-        html2Canvas(dom.current)
+        html2Canvas(dom.current, {
+          width: size.width,
+          height: size.height,
+          scale: 1,
+          onclone: (_, element) => {
+            element.setAttribute(
+              "style",
+              `--text-scale: 1; width: ${size.width}px; height: ${size.height}px`,
+            );
+          },
+        })
           .then((blob) => {
             const base64Image = blob.toDataURL("image/png");
             const link = document.createElement("a");
@@ -35,7 +49,7 @@ const useSnapshot = (dom: React.RefObject<HTMLElement>) => {
             setLoading(false);
           })
           .catch((err) => {
-            console.log(err);
+            console.error(err);
             setLoading(false);
           });
       }
