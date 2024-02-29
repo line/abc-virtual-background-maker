@@ -129,6 +129,7 @@ The `app.config.json` should be as below;
 | backgrounds            | Array of images. (Detailed explanation about `Image` is below) |         |
 | inputFields (optional) | Set up an input field group just for this theme                |         |
 | isNew (optional)       | If it's true, new icon shows up next to this theme             | `false` |
+| isHidden (optional)    | If it's true, this theme will be hidden                        | `false` |
 
 ### 🌆 Background Images
 
@@ -171,6 +172,7 @@ The `app.config.json` should be as below;
   | offset                | Adjusting detail position from origin point. (Detailed explanation is below) |         |
   | isRequired (optional) |                                                                              | `false` |
   | text (optional)       | Default value of input                                                       | `""`    |
+  | tooltip (optional)    | Allows you to add a description of the input.                                | `""`    |
 
 - Offset
 
@@ -282,7 +284,7 @@ With above structure, let say you want to override `themes` node for `office` th
           "fields": [
             {
               "label": "name",
-              "fontSize": "medium",
+              "fontSize": "Large",
               "fontStyle": "LINE Seed",
               "offset": {
                 "x": "0%",
@@ -297,7 +299,7 @@ With above structure, let say you want to override `themes` node for `office` th
           "fields": [
             {
               "label": "Team Name",
-              "fontSize": "medium",
+              "fontSize": "Large",
               "fontStyle": "LINE Seed",
               "offset": {
                 "x": "0%",

@@ -18,6 +18,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Alert, AlertButton } from "@/components";
 import { useAppConfiguration } from "@/hooks";
+import locales from "@/locales/common.json";
 import styles from "./DragAndDropFile.module.scss";
 
 const DragAndDropFile = () => {
@@ -102,8 +103,10 @@ const DragAndDropFile = () => {
       />
       {showAlert && (
         <Alert onClose={() => setShowAlert(false)}>
-          Only images can be uploaded.
-          <AlertButton onClick={() => setShowAlert(false)}>Confirm</AlertButton>
+          {locales["alert"]["uploadOnlyImages"]}
+          <AlertButton onClick={() => setShowAlert(false)}>
+            {locales["button"]["confirm"]}
+          </AlertButton>
         </Alert>
       )}
     </label>

@@ -1,7 +1,7 @@
 .tooltip {
   @include font("12", "label-inverse");
 
-  z-index: 10;
+  z-index: 9;
   position: absolute;
   top: 8.5rem;
   left: 21.5rem;

@@ -16,6 +16,10 @@
   "button": {
     "download": "Download",
     "contribute": "How To Contribute",
-    "github": "Github"
+    "github": "Github",
+    "confirm": "Confirm"
+  },
+  "alert": {
+    "uploadOnlyImages": "Only images can be uploaded."
   }
 }
