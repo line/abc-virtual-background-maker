@@ -126,6 +126,9 @@ const TextInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
               style={{
                 fontFamily: `'${style}', 'LINE Seed', 'LINE Seed KR', serif`,
               }}
+              autoComplete={"new-password"}
+              aria-autocomplete={"none"}
+              list={"autocomplete-off"}
             />
           </label>
           <span className={styles.tag}>{label}</span>
