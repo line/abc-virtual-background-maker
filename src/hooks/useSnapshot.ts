@@ -33,6 +33,9 @@ const useSnapshot = (dom: React.RefObject<HTMLElement>) => {
           height: size.height,
           scale: 1,
           onclone: (_, element) => {
+            element
+              .getElementsByTagName("img")[0]
+              .setAttribute("style", "border-radius: 0; box-shadow: none;");
             element.setAttribute(
               "style",
               `--text-scale: 1; width: ${size.width}px; height: ${size.height}px`,

@@ -23,6 +23,7 @@ import {
 } from "react";
 import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
 
+import { Tooltip } from "@/components";
 import { Alignment, Font, FontSize, FontSizes } from "@/constants";
 import { useElementSize } from "@/hooks";
 import styles from "./TextInput.module.scss";
@@ -36,6 +37,7 @@ interface Props {
   style?: Font;
   alignment?: Alignment;
   label: string;
+  tooltip?: string;
   defaultValue?: string;
   isFocused?: boolean;
   onFocus?: (event: FocusEvent<HTMLDivElement>) => void;
@@ -51,6 +53,7 @@ const TextInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
     alignment = "left",
     label,
     defaultValue,
+    tooltip,
     isFocused,
     onFocus,
     onBlur,
@@ -59,6 +62,7 @@ const TextInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const dragRef = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState("");
   const [dragPosition, setDragPosition] = useState(defaultPosition);
+  const [isDragging, setIsDragging] = useState(false);
 
   const placeholder = label.charAt(0).toUpperCase() + label.slice(1);
 
@@ -67,8 +71,13 @@ const TextInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
     setDragPosition(defaultPosition);
   };
 
+  const handleStart = () => {
+    setIsDragging(true);
+  };
+
   const handleStop = (_: DraggableEvent, data: DraggableData) => {
     setDragPosition({ x: data.x, y: data.y });
+    setIsDragging(false);
   };
 
   const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
@@ -105,6 +114,7 @@ const TextInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
         disabled={window?.innerWidth < 768}
         defaultPosition={defaultPosition}
         position={dragPosition}
+        onStart={handleStart}
         onStop={handleStop}
       >
         <div
@@ -147,6 +157,12 @@ const TextInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
       >
         {value?.length === 0 ? placeholder : value}
       </span>
+      <Tooltip
+        visible={Boolean(isFocused && tooltip) && !isDragging}
+        style={{ transform: `${dragRef?.current?.style.transform}` }}
+      >
+        {tooltip}
+      </Tooltip>
     </div>
   );
 });

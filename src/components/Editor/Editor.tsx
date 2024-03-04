@@ -31,7 +31,6 @@ import {
   Select,
   TextButton,
   ToggleOption,
-  Tooltip,
 } from "@/components";
 import {
   Alignment,
@@ -375,14 +374,6 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
         isVisible={guideVisible}
         onClose={() => setGuideVisible(false)}
       />
-      <Tooltip
-        visible={
-          Boolean(focusedInput) &&
-          Boolean(inputOptions?.[focusedInput]?.tooltip)
-        }
-      >
-        {inputOptions?.[focusedInput]?.tooltip}
-      </Tooltip>
     </>
   );
 });
