@@ -18,7 +18,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Alert, AlertButton } from "@/components";
 import { useAppConfiguration } from "@/hooks";
-import locales from "@/locales/common.json";
+import locales from "@/locales/en-US.json";
 import styles from "./DragAndDropFile.module.scss";
 
 const DragAndDropFile = () => {

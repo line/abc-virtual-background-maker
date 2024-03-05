@@ -25,7 +25,7 @@ import {
 } from "@/components";
 import { Config } from "@/constants/config";
 import { AppProvider, useMediaQuery, useSnapshot, useTitle } from "@/hooks";
-import locales from "@/locales/common.json";
+import locales from "@/locales/en-US.json";
 import styles from "./App.module.scss";
 
 function App() {

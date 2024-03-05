@@ -16,7 +16,7 @@
 import { ButtonHTMLAttributes } from "react";
 
 import { Loading } from "@/components";
-import locales from "@/locales/common.json";
+import locales from "@/locales/en-US.json";
 import styles from "./DownloadButton.module.scss";
 
 interface Props

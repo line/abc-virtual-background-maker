@@ -45,7 +45,7 @@ import {
 } from "@/constants";
 import { useAppConfiguration, useImageColor } from "@/hooks";
 import { IconGithub } from "@/icons";
-import locales from "@/locales/common.json";
+import locales from "@/locales/en-US.json";
 import { convertRgbToHex } from "@/utils";
 import styles from "./Editor.module.scss";
 
