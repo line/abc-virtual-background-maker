@@ -20,6 +20,7 @@
     "confirm": "Confirm"
   },
   "alert": {
-    "uploadOnlyImages": "Only images can be uploaded."
+    "uploadOnlyImages": "Only images can be uploaded.",
+    "makeSureImageExtensions": "Please make sure that the file you want to upload\nhas the following extensions: .jpg, .jpeg, .png, .gif, .bmp and .webp."
   }
 }

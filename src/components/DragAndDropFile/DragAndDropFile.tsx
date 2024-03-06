@@ -103,7 +103,8 @@ const DragAndDropFile = () => {
       />
       {showAlert && (
         <Alert onClose={() => setShowAlert(false)}>
-          {locales["alert"]["uploadOnlyImages"]}
+          <strong>{locales["alert"]["uploadOnlyImages"]}</strong>
+          <p>{locales["alert"]["makeSureImageExtensions"]}</p>
           <AlertButton onClick={() => setShowAlert(false)}>
             {locales["button"]["confirm"]}
           </AlertButton>

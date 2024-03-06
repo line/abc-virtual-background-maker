@@ -36,6 +36,8 @@
   justify-content: center;
   max-width: min(45rem, calc(100vw - 3rem));
   background-color: var(--background-tertiary);
+  white-space: pre-line;
+  text-align: center;
   border-radius: 0.5rem;
   animation:
     fade-in 0.3s cubic-bezier(0.17, 0.55, 0.55, 1),
@@ -52,6 +54,18 @@
         "GRAD" 0,
         "opsz" 24;
     }
+  }
+
+  strong {
+    @include font("16", "label-primary");
+
+    font-weight: bold;
+  }
+
+  p {
+    @include font("14", "label-secondary");
+
+    margin-top: 0.5rem;
   }
 }
 
