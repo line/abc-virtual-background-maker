@@ -227,6 +227,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
             dragKey={dragKey}
             ref={ref}
             isEditable
+            isImageDroppable={selectedTheme === "custom"}
             isImageFlip={isImageFlip}
             src={src}
             fontColor={fontColor}

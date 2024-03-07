@@ -49,6 +49,7 @@ interface Props {
   inputFields: Array<InputFieldGroup>;
   inputOptions: Record<string, InputField>;
   isEditable?: boolean;
+  isImageDroppable?: boolean;
   isImageFlip?: boolean;
   focusedInput?: string;
   handleFocusInput?: (event: FocusEvent<HTMLDivElement>) => void;
@@ -65,6 +66,7 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
     inputOptions,
     isEditable,
     isImageFlip,
+    isImageDroppable,
     focusedInput,
     handleFocusInput,
     handleBlurInput,
@@ -72,10 +74,8 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { isDarkImage } = useImageColor(src);
   const [imageRef, { width: imageWidth }] = useElementSize();
   const [initialColor, setInitialColor] = useState("");
-  const { defaultInputFields, handleDropCustomImages, selectedTheme } =
-    useAppConfiguration();
+  const { defaultInputFields, handleDropCustomImages } = useAppConfiguration();
   const [showAlert, setShowAlert] = useState(false);
-  const isDragAndDropEnabled = selectedTheme === "custom";
   const dragRef = useRef<HTMLDivElement>(null);
   const handleDrop = (e: DragEvent) => {
     try {
@@ -131,7 +131,7 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
       }
     >
       {src ? (
-        isDragAndDropEnabled ? (
+        isImageDroppable ? (
           <div ref={dragRef} className={styles.drop}>
             {isDragging && <span className={styles.dragging}></span>}
             <img src={src} alt="" ref={imageRef} width={1152} height={648} />
