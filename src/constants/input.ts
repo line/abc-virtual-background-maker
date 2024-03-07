@@ -24,4 +24,5 @@ export interface InputField {
   isRequired?: boolean;
   isVisible?: boolean;
   text?: string;
+  tooltip?: string;
 }

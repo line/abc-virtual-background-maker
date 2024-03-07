@@ -14,7 +14,7 @@
  * under the License.
  */
 import { CSSProperties, useEffect, useRef } from "react";
-import { keyColor, title } from "~/output.config.json";
+import config from "~/output.config.json";
 
 import {
   DownloadButton,
@@ -23,10 +23,13 @@ import {
   SyncButton,
   ThemeMenu,
 } from "@/components";
+import { Config } from "@/constants/config";
 import { AppProvider, useMediaQuery, useSnapshot, useTitle } from "@/hooks";
+import locales from "@/locales/en-US.json";
 import styles from "./App.module.scss";
 
 function App() {
+  const { keyColor, title } = config as unknown as Config;
   const imageAreaRef = useRef<HTMLDivElement>(null);
   const { saveImage, loading } = useSnapshot(imageAreaRef);
   const { logo, text } = title;
@@ -62,7 +65,7 @@ function App() {
         <div className={styles.content}>
           <nav className={styles.navigation}>
             <h2>
-              Select Theme <SyncButton />
+              {locales["title"]["theme"]} <SyncButton />
             </h2>
             <div>
               <ThemeMenu />

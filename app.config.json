@@ -11,13 +11,14 @@
     "type": "filesystem",
     "path": "backgrounds"
   },
+  "contributeGuide": "./CONTRIBUTING.md",
   "fonts": {
     "sizes": {
-      "large": "6rem",
-      "medium": "4.5rem",
-      "regular": "3.5rem",
-      "small": "3rem",
-      "caption": "1.5rem"
+      "XLarge": "6rem",
+      "Large": "4.5rem",
+      "Base": "3.5rem",
+      "Small": "3rem",
+      "XSmall": "1.5rem"
     },
     "styles": ["LINE Seed"]
   },
@@ -28,17 +29,18 @@
       "fields": [
         {
           "label": "name",
-          "fontSize": "medium",
+          "fontSize": "Large",
           "fontStyle": "LINE Seed",
           "offset": {
             "x": "0%",
             "y": "0%"
           },
-          "isRequired": true
+          "isRequired": true,
+          "tooltip": "Please enter your name."
         },
         {
           "label": "team",
-          "fontSize": "small",
+          "fontSize": "Small",
           "fontStyle": "LINE Seed",
           "offset": {
             "x": "0%",
@@ -47,7 +49,7 @@
         },
         {
           "label": "role",
-          "fontSize": "small",
+          "fontSize": "Small",
           "fontStyle": "LINE Seed",
           "offset": {
             "x": "0%",
@@ -70,7 +72,7 @@
           "fields": [
             {
               "label": "name",
-              "fontSize": "medium",
+              "fontSize": "Large",
               "fontStyle": "LINE Seed",
               "offset": {
                 "x": "0%",
@@ -80,7 +82,7 @@
             },
             {
               "label": "team",
-              "fontSize": "small",
+              "fontSize": "Small",
               "fontStyle": "LINE Seed",
               "offset": {
                 "x": "0%",
@@ -89,7 +91,7 @@
             },
             {
               "label": "role",
-              "fontSize": "small",
+              "fontSize": "Small",
               "fontStyle": "LINE Seed",
               "offset": {
                 "x": "0%",
@@ -103,7 +105,7 @@
           "fields": [
             {
               "label": "Company",
-              "fontSize": "medium",
+              "fontSize": "Large",
               "fontStyle": "LINE Seed",
               "offset": {
                 "x": "0%",
@@ -124,7 +126,7 @@
           "fields": [
             {
               "label": "name",
-              "fontSize": "medium",
+              "fontSize": "Large",
               "fontStyle": "LINE Seed",
               "offset": {
                 "x": "0%",
@@ -134,7 +136,7 @@
             },
             {
               "label": "role",
-              "fontSize": "small",
+              "fontSize": "Small",
               "fontStyle": "LINE Seed",
               "offset": {
                 "x": "0%",
@@ -148,7 +150,7 @@
           "fields": [
             {
               "label": "Company",
-              "fontSize": "medium",
+              "fontSize": "Large",
               "fontStyle": "LINE Seed",
               "offset": {
                 "x": "0%",

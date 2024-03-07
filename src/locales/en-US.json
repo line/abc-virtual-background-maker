@@ -1,0 +1,26 @@
+{
+  "title": {
+    "theme": "Select Theme"
+  },
+  "option": {
+    "text": "Text Option",
+    "image": "Image Option",
+    "flip": "Horizontal Flip",
+    "reset": "Reset Style",
+    "font": "Font",
+    "size": "Size",
+    "color": "Color",
+    "opacity": "Opacity",
+    "alignment": "Alignment"
+  },
+  "button": {
+    "download": "Download",
+    "contribute": "How To Contribute",
+    "github": "Github",
+    "confirm": "Confirm"
+  },
+  "alert": {
+    "uploadOnlyImages": "Only images can be uploaded.",
+    "makeSureImageExtensions": "Please make sure that the file you want to upload\nhas the following extensions: .jpg, .jpeg, .png, .gif, .bmp and .webp."
+  }
+}

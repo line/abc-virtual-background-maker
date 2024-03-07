@@ -30,3 +30,5 @@ export { TextInput } from "./TextInput";
 export { EditableImage } from "./EditableImage";
 export { DragAndDropFile } from "./DragAndDropFile";
 export { SyncButton } from "./SyncButton";
+export { Alert, AlertButton } from "./Alert";
+export { Tooltip } from "./Tooltip";

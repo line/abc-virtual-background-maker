@@ -5,4 +5,5 @@ export interface Theme {
   backgrounds: Array<Image>;
   inputFields?: Array<InputFieldGroup>;
   isNew?: boolean;
+  isHidden?: boolean;
 }

@@ -16,6 +16,7 @@
 import { ButtonHTMLAttributes } from "react";
 
 import { Loading } from "@/components";
+import locales from "@/locales/en-US.json";
 import styles from "./DownloadButton.module.scss";
 
 interface Props
@@ -43,7 +44,7 @@ const DownloadButton = (props: Props) => {
           <span className="material-symbols-outlined">download</span>
         )}
       </span>
-      <span className={styles.text}>Download</span>
+      <span className={styles.text}>{locales["button"]["download"]}</span>
     </button>
   );
 };

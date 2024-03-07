@@ -7,6 +7,8 @@ import stylelint from "vite-plugin-stylelint";
 import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 
+import type { Config } from "@/constants/config.ts";
+import type { Image } from "@/constants/image.ts";
 import config from "./app.config.json";
 
 // https://vitejs.dev/config/
@@ -19,6 +21,7 @@ export default defineConfig({
     stylelint({
       fix: true,
     }),
+    copyContributeGuide(),
     copyBackgroundsForFileSystem(),
   ],
   css: {
@@ -31,36 +34,64 @@ export default defineConfig({
   assetsInclude: ["**/*.md"],
 });
 
+function copyContributeGuide() {
+  const { contributeGuide } = config as unknown as Config;
+  const targetDirectory = "dist";
+
+  return copy({
+    targets: [
+      {
+        src: contributeGuide,
+        dest: targetDirectory,
+      },
+    ],
+    hook: "writeBundle",
+  });
+}
+
 /**
  * If config has `filesystem` type for `backgroundsUri`, copy local backgrounds path to dist folder
  */
 function copyBackgroundsForFileSystem() {
+  const { backgroundsUri, themes } = config as unknown as Config;
+
   if (
-    config.backgroundsUri &&
-    config.backgroundsUri.type === "filesystem" &&
-    config.backgroundsUri.path
+    backgroundsUri &&
+    backgroundsUri.type === "filesystem" &&
+    backgroundsUri.path
   ) {
     const dir = path.resolve();
-    const sourceDirectory = config.backgroundsUri.path;
+    const sourceDirectory = backgroundsUri.path;
     const targetDirectory = "dist";
-    const order = config.themes.map(({ name }) => name);
+    const order = themes.map(({ name }) => name);
+    const filteredOrder = themes
+      .filter(({ isHidden }) => !isHidden)
+      .map(({ name }) => name);
 
     const fileContentsArray = readFilesRecursively(sourceDirectory);
 
     order.map((theme, index) => {
+      const isThemeHidden =
+        themes.filter(({ name }) => name === theme)[0]?.isHidden ?? false;
       const filteredFileContentsArray = fileContentsArray.filter(
         ({ theme: fileTheme }) => fileTheme === theme,
       );
-      config.themes[index]["backgrounds"] = filteredFileContentsArray.map(
-        ({ src, fontColor }) => (fontColor ? { src, fontColor } : { src }),
-      );
+
+      themes[index]["backgrounds"] = isThemeHidden
+        ? []
+        : filteredFileContentsArray.map(({ src, fontColor }) =>
+            fontColor ? { src, fontColor } : { src },
+          );
     });
 
     const configJsonPath = path.join(dir, "output.config.json");
     fs.writeFileSync(configJsonPath, JSON.stringify(config, null, 2));
 
     return copy({
-      targets: [{ src: sourceDirectory, dest: targetDirectory }],
+      targets: filteredOrder.map((theme) => ({
+        src: path.join(sourceDirectory, theme),
+        dest: path.join(targetDirectory, backgroundsUri.path),
+      })),
       hook: "writeBundle",
     });
   } else {
@@ -70,22 +101,22 @@ function copyBackgroundsForFileSystem() {
   }
 }
 
-function readFilesRecursively(dir) {
-  const fileContentsArray = [];
+function readFilesRecursively(dir: string) {
+  const { backgroundsUri, themes } = config as unknown as Config;
+  const fileContentsArray: Image[] = [];
 
-  const readFiles = (dir) => {
+  const readFiles = (dir: string) => {
     const files = fs.readdirSync(dir);
-    const order = config.themes.map(({ name }) => name);
+    const order = themes
+      .filter(({ isHidden = false }) => !isHidden)
+      .map(({ name }) => name);
     const sortedFiles = files.sort(
       (a, b) => order.indexOf(a) - order.indexOf(b),
     );
 
     sortedFiles.forEach((file) => {
       const filePath = path.join(dir, file);
-      const theme = dir.replace(
-        path.join(config.backgroundsUri.path, path.sep),
-        "",
-      );
+      const theme = dir.replace(path.join(backgroundsUri.path, path.sep), "");
 
       if (fs.statSync(filePath).isDirectory()) {
         readFiles(filePath);
@@ -110,7 +141,7 @@ function readFilesRecursively(dir) {
   return fileContentsArray;
 }
 
-function isImageFile(filePath) {
+function isImageFile(filePath: string) {
   const allowedExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp"];
   const extension = path.extname(filePath).toLowerCase();
   return allowedExtensions.includes(extension);

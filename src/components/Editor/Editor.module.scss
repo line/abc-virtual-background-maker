@@ -23,9 +23,7 @@
 }
 
 .inner {
-  overflow: hidden;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.5px 0.5px var(--fill-tertiary);
+  overflow: visible;
 }
 
 .buttons {
@@ -49,108 +47,13 @@
   }
 }
 
-.image {
-  position: relative;
-  padding-top: 56.25%;
-
-  &.flip {
-    transform: scaleX(-1);
-  }
-
-  > img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    -webkit-user-drag: none;
-  }
-
-  .inputs {
-    position: absolute;
-    z-index: 2;
-    display: flex;
-    padding: 2.5rem 2.3rem;
-    transform: scale(var(--text-scale));
-
-    &.top-left {
-      top: 0;
-      left: 0;
-      transform-origin: top left;
-    }
-
-    &.top-center {
-      top: 0;
-      left: 50%;
-      transform: scale(var(--text-scale)) translateX(-50%);
-      transform-origin: top left;
-    }
-
-    &.top-right {
-      top: 0;
-      right: 0;
-      transform-origin: top right;
-    }
-
-    &.center-left {
-      top: 50%;
-      left: 0;
-      transform: scale(var(--text-scale)) translateY(-50%);
-      transform-origin: top left;
-    }
-
-    &.center {
-      top: 50%;
-      left: 50%;
-      transform: scale(var(--text-scale)) translate(-50%, -50%);
-      transform-origin: top left;
-    }
-
-    &.center-right {
-      top: 50%;
-      right: 0;
-      transform: scale(var(--text-scale)) translateY(-50%);
-      transform-origin: top right;
-    }
-
-    &.bottom-left {
-      bottom: 0;
-      left: 0;
-      transform-origin: bottom left;
-    }
-
-    &.bottom-center {
-      bottom: 0;
-      left: 50%;
-      transform: scale(var(--text-scale)) translateX(-50%);
-      transform-origin: bottom left;
-    }
-
-    &.bottom-right {
-      bottom: 0;
-      right: 0;
-      transform-origin: bottom right;
-    }
-
-    > li {
-      margin: 0 0.5rem;
-
-      &:first-of-type {
-        margin: 0 0.5rem 0.5rem;
-      }
-    }
-  }
-}
-
 .side {
   width: 22.5rem;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 1.5rem 0.5rem;
 
   @include mobile {
     width: 100%;
-    padding-top: 0;
+    padding: 0 1.5rem 1.5rem;
   }
 
   h3 {

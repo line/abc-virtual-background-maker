@@ -13,10 +13,9 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-import { useEffect, useState } from "react";
-import readmeFile from "~/CONTRIBUTING.md";
-import Markdown from "react-markdown";
+import React, { Suspense } from "react";
 
+import { Loading } from "@/components";
 import styles from "./GuideDialog.module.scss";
 
 interface Props {
@@ -26,13 +25,7 @@ interface Props {
 
 const GuideDialog = (props: Props) => {
   const { isVisible, onClose } = props;
-  const [markdown, setMarkdown] = useState("");
-
-  useEffect(() => {
-    fetch(readmeFile)
-      .then((response) => response.text())
-      .then(setMarkdown);
-  }, []);
+  const GuideMarkDown = React.lazy(() => import("./GuideMarkdown"));
 
   if (!isVisible) {
     return <></>;
@@ -41,9 +34,9 @@ const GuideDialog = (props: Props) => {
   return (
     <div className={styles.dim} onClick={onClose}>
       <div className={styles.guide} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.markdown}>
-          <Markdown disallowedElements={["img"]}>{`${markdown}`}</Markdown>
-        </div>
+        <Suspense fallback={<Loading />}>
+          <GuideMarkDown />
+        </Suspense>
         <button type="button" aria-label="Close guide modal" onClick={onClose}>
           <span className="material-symbols-outlined">cancel</span>
         </button>
