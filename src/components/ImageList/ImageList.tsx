@@ -13,11 +13,16 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-import { MutableRefObject, useEffect, useRef } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 
-import { ImageButton } from "@/components";
+import { Alert, AlertButton, ImageButton } from "@/components";
 import { Image } from "@/constants";
-import { useAppConfiguration, useDraggableScroll } from "@/hooks";
+import {
+  useAppConfiguration,
+  useDragAndDrop,
+  useDraggableScroll,
+} from "@/hooks";
+import locales from "@/locales/en-US.json";
 import styles from "./ImageList.module.scss";
 
 const ImageList = () => {
@@ -28,12 +33,24 @@ const ImageList = () => {
     handleChangeImage,
     customImages,
     handleChangeCustomImages,
+    handleDropCustomImages,
     handleDeleteCustomImage,
   } = useAppConfiguration();
   const draggableElementRef = useRef<HTMLUListElement>(null);
   const { events } = useDraggableScroll(
     draggableElementRef as MutableRefObject<HTMLUListElement>,
   );
+
+  const dragRef = useRef<HTMLLabelElement>(null);
+  const [showAlert, setShowAlert] = useState(false);
+  const handleDrop = (e: DragEvent) => {
+    try {
+      handleDropCustomImages(e);
+    } catch (e) {
+      setShowAlert(true);
+    }
+  };
+  const { isDragging } = useDragAndDrop(dragRef, handleDrop);
 
   useEffect(() => {
     draggableElementRef?.current?.scrollTo(0, 0);
@@ -73,7 +90,8 @@ const ImageList = () => {
             </li>
           ))}
           <li>
-            <label className={styles.file}>
+            {isDragging && <span className={styles.dragging}></span>}
+            <label className={styles.file} ref={dragRef}>
               <span className="material-symbols-outlined">add</span>
               <input
                 type="file"
@@ -83,6 +101,15 @@ const ImageList = () => {
             </label>
           </li>
         </>
+      )}
+      {showAlert && (
+        <Alert onClose={() => setShowAlert(false)}>
+          <strong>{locales["alert"]["uploadOnlyImages"]}</strong>
+          <p>{locales["alert"]["makeSureImageExtensions"]}</p>
+          <AlertButton onClick={() => setShowAlert(false)}>
+            {locales["button"]["confirm"]}
+          </AlertButton>
+        </Alert>
       )}
     </ul>
   );
