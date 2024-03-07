@@ -14,10 +14,10 @@
  * under the License.
  */
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { Alert, AlertButton } from "@/components";
-import { useAppConfiguration } from "@/hooks";
+import { useAppConfiguration, useDragAndDrop } from "@/hooks";
 import locales from "@/locales/en-US.json";
 import styles from "./DragAndDropFile.module.scss";
 
@@ -25,68 +25,15 @@ const DragAndDropFile = () => {
   const { handleChangeCustomImages, handleDropCustomImages } =
     useAppConfiguration();
   const dragRef = useRef<HTMLInputElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-
-  const handleDragIn = useCallback((e: DragEvent): void => {
-    e.preventDefault();
-    e.stopPropagation();
-  }, []);
-
-  const handleDragOut = useCallback((e: DragEvent): void => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    setIsDragging(false);
-  }, []);
-
-  const handleDragOver = useCallback((e: DragEvent): void => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (e.dataTransfer!.files) {
-      setIsDragging(true);
+  const handleDrop = (e: DragEvent) => {
+    try {
+      handleDropCustomImages(e);
+    } catch (e) {
+      setShowAlert(true);
     }
-  }, []);
-
-  const handleDrop = useCallback(
-    (e: DragEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      try {
-        handleDropCustomImages(e);
-      } catch (e) {
-        setShowAlert(true);
-      }
-      setIsDragging(false);
-    },
-    [handleDropCustomImages],
-  );
-
-  const initDragEvents = useCallback(() => {
-    if (dragRef.current !== null) {
-      dragRef.current.addEventListener("dragenter", handleDragIn);
-      dragRef.current.addEventListener("dragleave", handleDragOut);
-      dragRef.current.addEventListener("dragover", handleDragOver);
-      dragRef.current.addEventListener("drop", handleDrop);
-    }
-  }, [handleDragIn, handleDragOut, handleDragOver, handleDrop]);
-
-  const resetDragEvents = useCallback(() => {
-    if (dragRef.current !== null) {
-      dragRef.current.removeEventListener("dragenter", handleDragIn);
-      dragRef.current.removeEventListener("dragleave", handleDragOut);
-      dragRef.current.removeEventListener("dragover", handleDragOver);
-      dragRef.current.removeEventListener("drop", handleDrop);
-    }
-  }, [handleDragIn, handleDragOut, handleDragOver, handleDrop]);
-
-  useEffect(() => {
-    initDragEvents();
-
-    return () => resetDragEvents();
-  }, [initDragEvents, resetDragEvents]);
+  };
+  const { isDragging } = useDragAndDrop(dragRef, handleDrop);
 
   return (
     <label className={styles.file}>
