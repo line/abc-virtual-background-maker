@@ -19,10 +19,11 @@ import {
   forwardRef,
   MutableRefObject,
   useEffect,
+  useRef,
   useState,
 } from "react";
 
-import { DragAndDropFile, TextInput } from "@/components";
+import { Alert, AlertButton, DragAndDropFile, TextInput } from "@/components";
 import {
   Alignment,
   Font,
@@ -30,13 +31,18 @@ import {
   InputField,
   InputFieldGroup,
 } from "@/constants";
-import { useAppConfiguration, useElementSize, useImageColor } from "@/hooks";
+import {
+  useAppConfiguration,
+  useDragAndDrop,
+  useElementSize,
+  useImageColor,
+} from "@/hooks";
+import locales from "@/locales/en-US.json";
 import { convertHexToRgb } from "@/utils";
 import styles from "./EditableImage.module.scss";
 
 interface Props {
   dragKey?: string;
-  selectedTheme?: string;
   src: string;
   fontColor?: string;
   inputRefs?: MutableRefObject<Record<string, HTMLInputElement>>;
@@ -66,7 +72,19 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { isDarkImage } = useImageColor(src);
   const [imageRef, { width: imageWidth }] = useElementSize();
   const [initialColor, setInitialColor] = useState("");
-  const { defaultInputFields } = useAppConfiguration();
+  const { defaultInputFields, handleDropCustomImages, selectedTheme } =
+    useAppConfiguration();
+  const [showAlert, setShowAlert] = useState(false);
+  const isDragAndDropEnabled = selectedTheme === "custom";
+  const dragRef = useRef<HTMLDivElement>(null);
+  const handleDrop = (e: DragEvent) => {
+    try {
+      handleDropCustomImages(e);
+    } catch (e) {
+      setShowAlert(true);
+    }
+  };
+  const { isDragging } = useDragAndDrop(dragRef, handleDrop);
 
   useEffect(() => {
     setInitialColor(
@@ -113,7 +131,14 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
       }
     >
       {src ? (
-        <img src={src} alt="" ref={imageRef} width={1152} height={648} />
+        isDragAndDropEnabled ? (
+          <div ref={dragRef} className={styles.drop}>
+            {isDragging && <span className={styles.dragging}></span>}
+            <img src={src} alt="" ref={imageRef} width={1152} height={648} />
+          </div>
+        ) : (
+          <img src={src} alt="" ref={imageRef} width={1152} height={648} />
+        )
       ) : (
         <DragAndDropFile />
       )}
@@ -192,6 +217,15 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
           </ul>
         );
       })}
+      {showAlert && (
+        <Alert onClose={() => setShowAlert(false)}>
+          <strong>{locales["alert"]["uploadOnlyImages"]}</strong>
+          <p>{locales["alert"]["makeSureImageExtensions"]}</p>
+          <AlertButton onClick={() => setShowAlert(false)}>
+            {locales["button"]["confirm"]}
+          </AlertButton>
+        </Alert>
+      )}
     </div>
   );
 });
