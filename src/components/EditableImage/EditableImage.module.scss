@@ -22,7 +22,29 @@
     transform: scaleX(-1);
   }
 
-  > img {
+  .drop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .dragging {
+      z-index: 2;
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      width: calc(100% - 1rem);
+      height: calc(100% - 1rem);
+      border: 1px dashed var(--red-primary);
+      border-radius: 0.5rem;
+      background-color: rgb(0 0 0 / 10%);
+      pointer-events: none;
+      animation: scale 0.3s;
+    }
+  }
+
+  img {
     position: absolute;
     top: 0;
     left: 0;
@@ -110,5 +132,17 @@
         margin: 0 0.5rem 0.5rem;
       }
     }
+  }
+}
+
+@keyframes scale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

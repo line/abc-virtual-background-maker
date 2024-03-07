@@ -14,6 +14,7 @@
  * under the License.
  */
 export { default as useDraggableScroll } from "./useDraggableScroll";
+export { default as useDragAndDrop } from "./useDragAndDrop";
 export { default as useElementSize } from "./useElementSize";
 export { default as useEventListener } from "./useEventListener";
 export { default as useImageColor } from "./useImageColor";

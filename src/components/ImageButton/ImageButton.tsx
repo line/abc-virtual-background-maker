@@ -80,7 +80,6 @@ const ImageButton = (props: Props) => {
       <button type="button" onClick={onClick} className={styles.button}>
         <EditableImage
           src={src}
-          selectedTheme={theme}
           fontColor={textColor}
           inputFields={inputFields}
           inputOptions={inputOptions}
