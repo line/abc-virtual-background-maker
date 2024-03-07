@@ -179,6 +179,7 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
                         alignment={inputOptions[label].alignment as Alignment}
                         label={label}
                         defaultValue={text ?? ""}
+                        tooltip={inputOptions[label]?.tooltip}
                         isFocused={focusedInput === label}
                         onFocus={handleFocusInput}
                         onBlur={handleBlurInput}

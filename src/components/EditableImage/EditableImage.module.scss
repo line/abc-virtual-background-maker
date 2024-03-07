@@ -31,6 +31,9 @@
     height: 100%;
     object-fit: cover;
     -webkit-user-drag: none;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5px 0.5px var(--fill-tertiary);
   }
 
   .inputs {
@@ -101,6 +104,7 @@
 
     > li {
       margin: 0 0.5rem;
+      position: relative;
 
       &:first-of-type {
         margin: 0 0.5rem 0.5rem;

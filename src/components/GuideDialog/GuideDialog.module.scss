@@ -29,6 +29,7 @@
 
 .guide {
   position: relative;
+  text-align: center;
   width: min(45rem, 90%);
   padding: 2.5rem;
   font-weight: normal;
@@ -65,6 +66,7 @@
     overflow-y: auto;
     padding-right: 1.5rem;
     margin-right: -1.5rem;
+    text-align: left;
 
     @include mobile {
       padding-right: 1rem;

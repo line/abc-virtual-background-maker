@@ -16,7 +16,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { Alert, AlertButton } from "@/components";
 import { useAppConfiguration } from "@/hooks";
+import locales from "@/locales/en-US.json";
 import styles from "./DragAndDropFile.module.scss";
 
 const DragAndDropFile = () => {
@@ -24,6 +26,7 @@ const DragAndDropFile = () => {
     useAppConfiguration();
   const dragRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleDragIn = useCallback((e: DragEvent): void => {
     e.preventDefault();
@@ -51,7 +54,11 @@ const DragAndDropFile = () => {
       e.preventDefault();
       e.stopPropagation();
 
-      handleDropCustomImages(e);
+      try {
+        handleDropCustomImages(e);
+      } catch (e) {
+        setShowAlert(true);
+      }
       setIsDragging(false);
     },
     [handleDropCustomImages],
@@ -94,6 +101,15 @@ const DragAndDropFile = () => {
         accept="image/*"
         ref={dragRef}
       />
+      {showAlert && (
+        <Alert onClose={() => setShowAlert(false)}>
+          <strong>{locales["alert"]["uploadOnlyImages"]}</strong>
+          <p>{locales["alert"]["makeSureImageExtensions"]}</p>
+          <AlertButton onClick={() => setShowAlert(false)}>
+            {locales["button"]["confirm"]}
+          </AlertButton>
+        </Alert>
+      )}
     </label>
   );
 };

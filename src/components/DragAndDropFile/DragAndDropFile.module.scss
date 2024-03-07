@@ -29,6 +29,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5px 0.5px var(--fill-tertiary);
 
   .dragging {
     z-index: 2;
@@ -44,18 +47,6 @@
     animation: scale 0.3s;
   }
 
-  @keyframes scale {
-    from {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
   .icon {
     font-size: 3rem;
   }
@@ -67,5 +58,17 @@
     width: 100%;
     height: 100%;
     opacity: 0;
+  }
+}
+
+@keyframes scale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

@@ -13,25 +13,28 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-import config from "~/output.config.json";
+import { useEffect, useState } from "react";
+import config from "~/app.config.json";
+import Markdown from "react-markdown";
 
 import { Config } from "@/constants/config";
+import styles from "./GuideDialog.module.scss";
 
-const { fonts } = config as unknown as Config;
+const GuideMarkdown = () => {
+  const { contributeGuide } = config as unknown as Config;
+  const [markdown, setMarkdown] = useState("");
 
-export const FontSizes: Record<string, string> = {} as const;
-Object.keys(fonts.sizes).forEach(
-  (size) => (FontSizes[size] = fonts.sizes[size as keyof typeof fonts.sizes]),
-);
-export type FontSize = keyof typeof FontSizes;
+  useEffect(() => {
+    fetch(contributeGuide)
+      .then((response) => response.text())
+      .then(setMarkdown);
+  }, [contributeGuide]);
 
-export const Fonts: Record<string, string> = {} as const;
-fonts.styles.forEach((font) => (Fonts[font] = font));
-export type Font = keyof typeof Fonts;
-
-export const Alignments = {
-  left: "left",
-  center: "center",
-  right: "right",
+  return (
+    <div className={styles.markdown}>
+      <Markdown disallowedElements={["img"]}>{`${markdown}`}</Markdown>
+    </div>
+  );
 };
-export type Alignment = keyof typeof Alignments;
+
+export default GuideMarkdown;
