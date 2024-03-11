@@ -80,8 +80,8 @@ devDependencies:
     specifier: ^3.5.0
     version: 3.5.0
   sass:
-    specifier: ^1.69.5
-    version: 1.69.5
+    specifier: ^1.71.1
+    version: 1.71.1
   stylelint:
     specifier: ^16.0.2
     version: 16.1.0(typescript@5.2.2)
@@ -99,7 +99,7 @@ devDependencies:
     version: 5.2.2
   vite:
     specifier: ^5.0.12
-    version: 5.0.12(@types/node@20.11.5)(sass@1.69.5)
+    version: 5.0.12(@types/node@20.11.5)(sass@1.71.1)
   vite-plugin-stylelint:
     specifier: ^5.3.1
     version: 5.3.1(postcss@8.4.32)(stylelint@16.1.0)(vite@5.0.12)
@@ -1253,7 +1253,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.23.3(@babel/core@7.23.3)
       '@types/babel__core': 7.20.4
       react-refresh: 0.14.0
-      vite: 5.0.12(@types/node@20.11.5)(sass@1.69.5)
+      vite: 5.0.12(@types/node@20.11.5)(sass@1.71.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3908,8 +3908,8 @@ packages:
       is-regex: 1.1.4
     dev: true
 
-  /sass@1.69.5:
-    resolution: {integrity: sha512-qg2+UCJibLr2LCVOt3OlPhr/dqVHWOa9XtZf2OjbLs/T4VPSJ00udtgJxH3neXZm+QqX8B+3cU7RaLqp1iVfcQ==}
+  /sass@1.71.1:
+    resolution: {integrity: sha512-wovtnV2PxzteLlfNzbgm1tFXPLoZILYAMJtvoXXkD7/+1uP41eKkIt1ypWq5/q2uT94qHjXehEYfmjKOvjL9sg==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
@@ -4548,7 +4548,7 @@ packages:
       debug: 4.3.4
       postcss: 8.4.32
       stylelint: 16.1.0(typescript@5.2.2)
-      vite: 5.0.12(@types/node@20.11.5)(sass@1.69.5)
+      vite: 5.0.12(@types/node@20.11.5)(sass@1.71.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4561,7 +4561,7 @@ packages:
       '@rollup/pluginutils': 5.0.5
       '@svgr/core': 8.1.0(typescript@5.2.2)
       '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0)
-      vite: 5.0.12(@types/node@20.11.5)(sass@1.69.5)
+      vite: 5.0.12(@types/node@20.11.5)(sass@1.71.1)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -4579,13 +4579,13 @@ packages:
       debug: 4.3.4
       globrex: 0.1.2
       tsconfck: 2.1.2(typescript@5.2.2)
-      vite: 5.0.12(@types/node@20.11.5)(sass@1.69.5)
+      vite: 5.0.12(@types/node@20.11.5)(sass@1.71.1)
     transitivePeerDependencies:
       - supports-color
       - typescript
     dev: true
 
-  /vite@5.0.12(@types/node@20.11.5)(sass@1.69.5):
+  /vite@5.0.12(@types/node@20.11.5)(sass@1.71.1):
     resolution: {integrity: sha512-4hsnEkG3q0N4Tzf1+t6NdN9dg/L3BM+q8SWgbSPnJvrgH2kgdyzfVJwbR1ic69/4uMJJ/3dqDZZE5/WwqW8U1w==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -4617,7 +4617,7 @@ packages:
       esbuild: 0.19.6
       postcss: 8.4.32
       rollup: 4.5.0
-      sass: 1.69.5
+      sass: 1.71.1
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
