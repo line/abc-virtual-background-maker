@@ -25,7 +25,7 @@ const useSnapshot = (dom: React.RefObject<HTMLElement>) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const saveImage = useCallback(
-    async (fileName: string = "image.png") => {
+    async (fileName = "image.png", backgroundSize = "cover") => {
       if (!loading && dom.current) {
         setLoading(true);
         html2Canvas(dom.current, {
@@ -33,12 +33,12 @@ const useSnapshot = (dom: React.RefObject<HTMLElement>) => {
           height: size.height,
           scale: 1,
           onclone: (_, element) => {
-            element
-              .getElementsByTagName("img")[0]
-              .setAttribute("style", "border-radius: 0; box-shadow: none;");
+            const imageElement = element.getElementsByTagName("img")[0];
+            const src = imageElement.getAttribute("src");
+            imageElement.setAttribute("style", "display: none;");
             element.setAttribute(
               "style",
-              `--text-scale: 1; width: ${size.width}px; height: ${size.height}px`,
+              `--text-scale: 1; width: ${size.width}px; padding-top: ${size.height}px; background-image: url('${src}'); background-size: ${backgroundSize}; background-position: center;`,
             );
           },
         })
