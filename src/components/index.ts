@@ -22,6 +22,7 @@ export { ImageList } from "./ImageList";
 export { ImageButton } from "./ImageButton";
 export { Loading } from "./Loading";
 export { Select } from "./Select";
+export { LocaleSelect } from "./LocaleSelect";
 export { AlignSelect } from "./AlignSelect";
 export { ColorPicker } from "./ColorPicker";
 export { OpacityRange } from "./OpacityRange";

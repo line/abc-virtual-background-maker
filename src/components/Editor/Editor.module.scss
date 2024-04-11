@@ -48,6 +48,8 @@
 }
 
 .side {
+  display: flex;
+  flex-direction: column;
   width: 22.5rem;
   padding: 1.5rem 1.5rem 1.5rem 0.5rem;
 
