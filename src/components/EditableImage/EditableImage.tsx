@@ -44,6 +44,10 @@ import styles from "./EditableImage.module.scss";
 interface Props {
   dragKey?: string;
   src: string;
+  size?: {
+    width: string;
+    height: string;
+  };
   fontColor?: string;
   inputRefs?: MutableRefObject<Record<string, HTMLInputElement>>;
   inputFields: Array<InputFieldGroup>;
@@ -60,6 +64,7 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const {
     dragKey,
     src,
+    size,
     fontColor,
     inputRefs,
     inputFields,
@@ -74,7 +79,8 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { isDarkImage } = useImageColor(src);
   const [imageRef, { width: imageWidth }] = useElementSize();
   const [initialColor, setInitialColor] = useState("");
-  const { defaultInputFields, handleDropCustomImages } = useAppConfiguration();
+  const { selectedTheme, defaultInputFields, handleDropCustomImages } =
+    useAppConfiguration();
   const [showAlert, setShowAlert] = useState(false);
   const dragRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
@@ -86,6 +92,8 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
     }
   };
   const { isDragging } = useDragAndDrop(dragRef, handleDrop);
+  const placeholderImage =
+    "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 
   useEffect(() => {
     setInitialColor(
@@ -131,31 +139,33 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
         } as CSSProperties
       }
     >
-      {src ? (
-        isImageDroppable ? (
-          <div ref={dragRef} className={styles.drop}>
-            {isDragging && <span className={styles.dragging}></span>}
-            <img
-              src={src}
-              alt=""
-              ref={imageRef}
-              width={1152}
-              height={648}
-              className={styles.preview}
-            />
-          </div>
-        ) : (
+      {selectedTheme === "custom" ? (
+        <DragAndDropFile />
+      ) : isImageDroppable ? (
+        <div ref={dragRef} className={styles.drop}>
+          {isDragging && <span className={styles.dragging}></span>}
           <img
-            src={src}
+            src={src ?? placeholderImage}
             alt=""
             ref={imageRef}
-            width={1152}
-            height={648}
+            width={size?.width ?? 1152}
+            height={size?.width ?? 648}
             className={styles.preview}
+            loading={size ? "lazy" : "eager"}
           />
-        )
+        </div>
       ) : (
-        <DragAndDropFile />
+        <>
+          <img
+            src={src ?? placeholderImage}
+            alt=""
+            ref={imageRef}
+            width={size?.width ?? 1152}
+            height={size?.width ?? 648}
+            className={styles.preview}
+            loading={size ? "lazy" : "eager"}
+          />
+        </>
       )}
       {inputFields.map(({ direction, offset, position, fields }, index) => {
         const inputFieldGroupDirection =
@@ -198,6 +208,7 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
                     <li key={index}>
                       <img
                         src={image}
+                        alt=""
                         style={{
                           transform: offset
                             ? `translate(${offset.x},${offset.y})`
