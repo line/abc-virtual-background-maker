@@ -44,7 +44,7 @@
     }
   }
 
-  img {
+  .preview {
     position: absolute;
     top: 0;
     left: 0;
@@ -130,6 +130,10 @@
 
       &:first-of-type {
         margin: 0 0.5rem 0.5rem;
+      }
+
+      > img {
+        max-inline-size: fit-content;
       }
     }
   }

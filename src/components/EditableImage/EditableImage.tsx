@@ -135,10 +135,24 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
         isImageDroppable ? (
           <div ref={dragRef} className={styles.drop}>
             {isDragging && <span className={styles.dragging}></span>}
-            <img src={src} alt="" ref={imageRef} width={1152} height={648} />
+            <img
+              src={src}
+              alt=""
+              ref={imageRef}
+              width={1152}
+              height={648}
+              className={styles.preview}
+            />
           </div>
         ) : (
-          <img src={src} alt="" ref={imageRef} width={1152} height={648} />
+          <img
+            src={src}
+            alt=""
+            ref={imageRef}
+            width={1152}
+            height={648}
+            className={styles.preview}
+          />
         )
       ) : (
         <DragAndDropFile />
@@ -164,12 +178,40 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
           >
             {fields.map(
               (
-                { label, fontSize, fontStyle, offset, text, opacity = 100 },
+                {
+                  label,
+                  fontSize,
+                  fontStyle,
+                  offset,
+                  text,
+                  opacity = 100,
+                  image,
+                  imageSize,
+                },
                 index,
               ) => {
                 const fontColorRgb = convertHexToRgb(
                   inputOptions[label]?.fontColor ?? "",
                 );
+                if (!label) {
+                  return (
+                    <li key={index}>
+                      <img
+                        src={image}
+                        style={{
+                          transform: offset
+                            ? `translate(${offset.x},${offset.y})`
+                            : "",
+                          width: imageSize?.width,
+                          height: imageSize?.height,
+                          opacity: opacity,
+                        }}
+                        width={imageSize?.width}
+                        height={imageSize?.height}
+                      />
+                    </li>
+                  );
+                }
                 return (
                   inputOptions[label]?.isVisible && (
                     <li

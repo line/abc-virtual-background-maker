@@ -149,9 +149,12 @@
           "position": "bottom-right",
           "fields": [
             {
-              "label": "Company",
-              "fontSize": "Large",
-              "fontStyle": "LINE Seed",
+              "image": "./sample_logo.png",
+              "imageSize": {
+                "width": "117",
+                "height": "41"
+              },
+              "opacity": "1",
               "offset": {
                 "x": "0%",
                 "y": "0%"

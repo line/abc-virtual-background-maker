@@ -11,7 +11,7 @@ export interface InputFieldGroup {
     | "bottom-left"
     | "bottom-center"
     | "bottom-right";
-  fields: Array<InputField>;
+  fields: Array<InputField & ImageField>;
 }
 export interface InputField {
   label: string;
@@ -25,4 +25,14 @@ export interface InputField {
   isVisible?: boolean;
   text?: string;
   tooltip?: string;
+}
+
+export interface ImageField {
+  image: string;
+  imageSize?: {
+    width?: string;
+    height?: string;
+  };
+  opacity?: number;
+  offset?: { x: string; y: string };
 }
