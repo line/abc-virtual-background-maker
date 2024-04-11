@@ -22,6 +22,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Alert, AlertButton, DragAndDropFile, TextInput } from "@/components";
 import {
@@ -37,7 +38,6 @@ import {
   useElementSize,
   useImageColor,
 } from "@/hooks";
-import locales from "@/locales/en-US.json";
 import { convertHexToRgb } from "@/utils";
 import styles from "./EditableImage.module.scss";
 
@@ -77,6 +77,7 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { defaultInputFields, handleDropCustomImages } = useAppConfiguration();
   const [showAlert, setShowAlert] = useState(false);
   const dragRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
   const handleDrop = (e: DragEvent) => {
     try {
       handleDropCustomImages(e);
@@ -219,10 +220,10 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
       })}
       {showAlert && (
         <Alert onClose={() => setShowAlert(false)}>
-          <strong>{locales["alert"]["uploadOnlyImages"]}</strong>
-          <p>{locales["alert"]["makeSureImageExtensions"]}</p>
+          <strong>{t("alert.uploadOnlyImages")}</strong>
+          <p>{t("alert.makeSureImageExtensions")}</p>
           <AlertButton onClick={() => setShowAlert(false)}>
-            {locales["button"]["confirm"]}
+            {t("button.confirm")}
           </AlertButton>
         </Alert>
       )}

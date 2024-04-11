@@ -21,6 +21,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   AlignSelect,
@@ -45,7 +46,6 @@ import {
 } from "@/constants";
 import { useAppConfiguration, useImageColor } from "@/hooks";
 import { IconGithub } from "@/icons";
-import locales from "@/locales/en-US.json";
 import { convertRgbToHex } from "@/utils";
 import styles from "./Editor.module.scss";
 
@@ -71,6 +71,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
       ?.inputFields as Array<InputFieldGroup>) ?? defaultInputFields;
   const [inputFields, setInputFields] =
     useState<Array<InputFieldGroup>>(initialInputFields);
+  const { t } = useTranslation();
 
   const handleClickGithub = () => {
     window.open(
@@ -244,10 +245,10 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
             icon={<span className="material-symbols-outlined">help</span>}
             onClick={() => setGuideVisible(true)}
           >
-            {locales["button"]["contribute"]}
+            {t("button.contribute")}
           </TextButton>
           <TextButton icon={<IconGithub />} onClick={handleClickGithub}>
-            {locales["button"]["github"]}
+            {t("button.github")}
           </TextButton>
         </div>
       </div>
@@ -261,7 +262,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
               tabIndex={0}
             >
               <li className={styles.custom}>
-                <strong>{locales["option"]["font"]}</strong>
+                <strong>{t("option.font")}</strong>
                 <Select
                   defaultValue={inputOptions?.[focusedInput]?.fontStyle}
                   value={inputOptions?.[focusedInput]?.fontStyle}
@@ -273,7 +274,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                 />
               </li>
               <li className={styles.custom}>
-                <strong>{locales["option"]["size"]}</strong>
+                <strong>{t("option.size")}</strong>
                 <Select
                   defaultValue={inputOptions?.[focusedInput]?.fontSize}
                   value={inputOptions?.[focusedInput]?.fontSize}
@@ -287,7 +288,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                 />
               </li>
               <li className={styles.custom}>
-                <strong>{locales["option"]["color"]}</strong>
+                <strong>{t("option.color")}</strong>
                 <ColorPicker
                   defaultValue={
                     inputOptions?.[focusedInput]?.fontColor ??
@@ -297,14 +298,14 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                 />
               </li>
               <li className={styles.custom}>
-                <strong>{locales["option"]["opacity"]}</strong>
+                <strong>{t("option.opacity")}</strong>
                 <OpacityRange
                   defaultValue={inputOptions?.[focusedInput]?.opacity}
                   onChange={(e) => handleChangeOpacity(Number(e.target.value))}
                 />
               </li>
               <li className={styles.custom}>
-                <strong>{locales["option"]["alignment"]}</strong>
+                <strong>{t("option.alignment")}</strong>
                 <AlignSelect
                   defaultValue={
                     inputOptions?.[focusedInput]?.alignment ?? "left"
@@ -325,7 +326,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
           </>
         ) : (
           <>
-            <h3>{locales["option"]["text"]}</h3>
+            <h3>{t("option.text")}</h3>
             {inputFields.map(({ fields }, index) => (
               <ul key={index}>
                 {fields.map(({ label, isRequired }, index) => (
@@ -340,14 +341,14 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                 ))}
               </ul>
             ))}
-            <h3>{locales["option"]["image"]}</h3>
+            <h3>{t("option.image")}</h3>
             <ul>
               <li>
                 <ToggleOption
                   label={
                     <>
                       <span className="material-symbols-outlined">flip</span>
-                      {locales["option"]["flip"]}
+                      {t("option.flip")}
                     </>
                   }
                   isSelected={isImageFlip}
@@ -364,7 +365,7 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
                   onClick={handleReset}
                   className={styles.reset}
                 >
-                  {locales["option"]["reset"]}
+                  {t("option.reset")}
                 </TextButton>
               </li>
             </ul>

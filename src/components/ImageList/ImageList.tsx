@@ -14,6 +14,7 @@
  * under the License.
  */
 import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Alert, AlertButton, ImageButton } from "@/components";
 import { Image } from "@/constants";
@@ -22,7 +23,6 @@ import {
   useDragAndDrop,
   useDraggableScroll,
 } from "@/hooks";
-import locales from "@/locales/en-US.json";
 import styles from "./ImageList.module.scss";
 
 const ImageList = () => {
@@ -51,6 +51,7 @@ const ImageList = () => {
     }
   };
   const { isDragging } = useDragAndDrop(dragRef, handleDrop);
+  const { t } = useTranslation();
 
   useEffect(() => {
     draggableElementRef?.current?.scrollTo(0, 0);
@@ -104,10 +105,10 @@ const ImageList = () => {
       )}
       {showAlert && (
         <Alert onClose={() => setShowAlert(false)}>
-          <strong>{locales["alert"]["uploadOnlyImages"]}</strong>
-          <p>{locales["alert"]["makeSureImageExtensions"]}</p>
+          <strong>{t("alert.uploadOnlyImages")}</strong>
+          <p>{t("alert.makeSureImageExtensions")}</p>
           <AlertButton onClick={() => setShowAlert(false)}>
-            {locales["button"]["confirm"]}
+            {t("button.confirm")}
           </AlertButton>
         </Alert>
       )}

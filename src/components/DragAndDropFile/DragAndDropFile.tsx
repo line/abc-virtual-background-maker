@@ -15,10 +15,10 @@
  */
 
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Alert, AlertButton } from "@/components";
 import { useAppConfiguration, useDragAndDrop } from "@/hooks";
-import locales from "@/locales/en-US.json";
 import styles from "./DragAndDropFile.module.scss";
 
 const DragAndDropFile = () => {
@@ -34,6 +34,7 @@ const DragAndDropFile = () => {
     }
   };
   const { isDragging } = useDragAndDrop(dragRef, handleDrop);
+  const { t } = useTranslation();
 
   return (
     <label className={styles.file}>
@@ -50,10 +51,10 @@ const DragAndDropFile = () => {
       />
       {showAlert && (
         <Alert onClose={() => setShowAlert(false)}>
-          <strong>{locales["alert"]["uploadOnlyImages"]}</strong>
-          <p>{locales["alert"]["makeSureImageExtensions"]}</p>
+          <strong>{t("alert.uploadOnlyImages")}</strong>
+          <p>{t("alert.makeSureImageExtensions")}</p>
           <AlertButton onClick={() => setShowAlert(false)}>
-            {locales["button"]["confirm"]}
+            {t("button.confirm")}
           </AlertButton>
         </Alert>
       )}

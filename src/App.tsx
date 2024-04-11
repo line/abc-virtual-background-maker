@@ -15,6 +15,7 @@
  */
 import { CSSProperties, useEffect, useRef } from "react";
 import config from "~/output.config.json";
+import { useTranslation } from "react-i18next";
 
 import {
   DownloadButton,
@@ -25,7 +26,6 @@ import {
 } from "@/components";
 import { Config } from "@/constants/config";
 import { AppProvider, useMediaQuery, useSnapshot, useTitle } from "@/hooks";
-import locales from "@/locales/en-US.json";
 import styles from "./App.module.scss";
 
 function App() {
@@ -35,6 +35,7 @@ function App() {
   const { logo, text } = title;
   const changeTitle = useTitle();
   const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
+  const { t } = useTranslation();
 
   useEffect(() => {
     changeTitle(text);
@@ -65,7 +66,7 @@ function App() {
         <div className={styles.content}>
           <nav className={styles.navigation}>
             <h2>
-              {locales["title"]["theme"]} <SyncButton />
+              {t("title.theme")} <SyncButton />
             </h2>
             <div>
               <ThemeMenu />

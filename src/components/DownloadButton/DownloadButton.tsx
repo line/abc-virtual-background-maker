@@ -14,9 +14,9 @@
  * under the License.
  */
 import { ButtonHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Loading } from "@/components";
-import locales from "@/locales/en-US.json";
 import styles from "./DownloadButton.module.scss";
 
 interface Props
@@ -29,6 +29,7 @@ interface Props
 
 const DownloadButton = (props: Props) => {
   const { isLoading, disabled, onClick } = props;
+  const { t } = useTranslation();
 
   return (
     <button
@@ -44,7 +45,7 @@ const DownloadButton = (props: Props) => {
           <span className="material-symbols-outlined">download</span>
         )}
       </span>
-      <span className={styles.text}>{locales["button"]["download"]}</span>
+      <span className={styles.text}>{t("button.download")}</span>
     </button>
   );
 };
