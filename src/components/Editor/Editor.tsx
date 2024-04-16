@@ -339,16 +339,19 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
             <h3>{t("option.text")}</h3>
             {inputFields.map(({ fields }, index) => (
               <ul key={index}>
-                {fields.map(({ label, isRequired }, index) => (
-                  <li key={index}>
-                    <ToggleOption
-                      label={label}
-                      isRequired={isRequired}
-                      isSelected={Boolean(inputOptions[label]?.isVisible)}
-                      onClick={() => handleClickInput(label)}
-                    />
-                  </li>
-                ))}
+                {fields.map(
+                  ({ label, isRequired }, index) =>
+                    label && (
+                      <li key={index}>
+                        <ToggleOption
+                          label={label}
+                          isRequired={isRequired}
+                          isSelected={Boolean(inputOptions[label]?.isVisible)}
+                          onClick={() => handleClickInput(label)}
+                        />
+                      </li>
+                    ),
+                )}
               </ul>
             ))}
             <h3>{t("option.image")}</h3>
