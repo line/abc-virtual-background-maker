@@ -21,5 +21,3 @@ export { default as useImageColor } from "./useImageColor";
 export { default as useSnapshot } from "./useSnapshot";
 export { default as useMediaQuery } from "./useMediaQuery";
 export { default as useTitle } from "./useTitle";
-export { default as useAppConfiguration } from "./useAppConfiguration";
-export { AppProvider } from "./useAppConfiguration/AppContext";

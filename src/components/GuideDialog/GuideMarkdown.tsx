@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import config from "~/app.config.json";
 import Markdown from "react-markdown";
 
-import { Config } from "@/constants/config";
+import type { Config } from "@/constants";
 import styles from "./GuideDialog.module.scss";
 
 const GuideMarkdown = () => {

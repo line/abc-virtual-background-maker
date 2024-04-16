@@ -14,10 +14,12 @@
  * under the License.
  */
 import { CSSProperties, useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 
 import { EditableImage } from "@/components";
 import { InputField, InputFieldGroup, Theme } from "@/constants";
-import { useAppConfiguration, useImageColor } from "@/hooks";
+import { useImageColor } from "@/hooks";
+import { defaultInputFieldsState, themesState } from "@/states";
 import styles from "./ImageButton.module.scss";
 
 const DEFAULT_FONT_STYLE = "LINE Seed";
@@ -32,8 +34,9 @@ interface Props {
 
 const ImageButton = (props: Props) => {
   const { theme, src, color, onClick, onClickDelete } = props;
-  const { themes, defaultInputFields } = useAppConfiguration();
   const { isDarkImage } = useImageColor(src);
+  const themes = useRecoilValue(themesState);
+  const defaultInputFields = useRecoilValue(defaultInputFieldsState);
   const textColor = color
     ? color
     : isDarkImage === null

@@ -13,29 +13,36 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { Alert, AlertButton, ImageButton } from "@/components";
-import { Image } from "@/constants";
+import type { Image } from "@/constants";
+import { useDragAndDrop, useDraggableScroll } from "@/hooks";
 import {
-  useAppConfiguration,
-  useDragAndDrop,
-  useDraggableScroll,
-} from "@/hooks";
+  customBackgroundsState,
+  selectedBackgroundState,
+  selectedThemeState,
+  themesState,
+} from "@/states";
 import styles from "./ImageList.module.scss";
 
 const ImageList = () => {
-  const {
-    themes,
-    selectedTheme,
-    selectedImage,
-    handleChangeImage,
-    customImages,
-    handleChangeCustomImages,
-    handleDropCustomImages,
-    handleDeleteCustomImage,
-  } = useAppConfiguration();
+  const themes = useRecoilValue(themesState);
+  const selectedTheme = useRecoilValue(selectedThemeState);
+  const [selectedBackground, setSelectedBackground] = useRecoilState(
+    selectedBackgroundState,
+  );
+  const [customBackgrounds, setCustomBackgrounds] = useRecoilState(
+    customBackgroundsState,
+  );
   const draggableElementRef = useRef<HTMLUListElement>(null);
   const { events } = useDraggableScroll(
     draggableElementRef as MutableRefObject<HTMLUListElement>,
@@ -43,6 +50,19 @@ const ImageList = () => {
 
   const dragRef = useRef<HTMLLabelElement>(null);
   const [showAlert, setShowAlert] = useState(false);
+
+  const handleDropCustomImages = (event: DragEvent) => {
+    const file = ((event.dataTransfer as DataTransfer).files as FileList)[0];
+    const src = URL.createObjectURL(file);
+
+    if (file.type.includes("image")) {
+      setCustomBackgrounds([...customBackgrounds, { src, theme: "custom" }]);
+    } else {
+      throw new Error("FileNotAcceptable");
+    }
+    return () => URL.revokeObjectURL(src);
+  };
+
   const handleDrop = (e: DragEvent) => {
     try {
       handleDropCustomImages(e);
@@ -50,8 +70,24 @@ const ImageList = () => {
       setShowAlert(true);
     }
   };
+
   const { isDragging } = useDragAndDrop(dragRef, handleDrop);
   const { t } = useTranslation();
+
+  const handleChangeCustomImages = (event: ChangeEvent<HTMLInputElement>) => {
+    const src = URL.createObjectURL(
+      ((event.target as HTMLInputElement).files as FileList)[0],
+    );
+    setCustomBackgrounds([...customBackgrounds, { src, theme: "custom" }]);
+
+    return () => URL.revokeObjectURL(src);
+  };
+
+  const handleDeleteCustomImage = (src: string) => {
+    setCustomBackgrounds([
+      ...customBackgrounds.filter((file: { src: string }) => file.src !== src),
+    ]);
+  };
 
   useEffect(() => {
     draggableElementRef?.current?.scrollTo(0, 0);
@@ -65,27 +101,35 @@ const ImageList = () => {
           theme.backgrounds.map((image: Image, index) => (
             <li
               key={index}
-              className={selectedImage.src === image.src ? styles.selected : ""}
+              className={
+                selectedBackground.src === image.src ? styles.selected : ""
+              }
             >
               <ImageButton
                 theme={theme.name}
                 src={image.src}
                 color={image?.fontColor}
-                onClick={() => handleChangeImage(theme.name, image)}
+                onClick={() =>
+                  setSelectedBackground({ theme: theme.name, ...image })
+                }
               />
             </li>
           )),
         )}
       {(selectedTheme === "all" || selectedTheme === "custom") && (
         <>
-          {customImages?.map((file: Image, index) => (
+          {customBackgrounds?.map((file: Image, index: number) => (
             <li
               key={index}
-              className={selectedImage.src === file.src ? styles.selected : ""}
+              className={
+                selectedBackground.src === file.src ? styles.selected : ""
+              }
             >
               <ImageButton
                 src={file.src}
-                onClick={() => handleChangeImage("custom", { src: file.src })}
+                onClick={() =>
+                  setSelectedBackground({ theme: "custom", src: file.src })
+                }
                 onClickDelete={() => handleDeleteCustomImage(file.src)}
               />
             </li>

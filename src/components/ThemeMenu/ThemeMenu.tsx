@@ -14,29 +14,41 @@
  * under the License.
  */
 
-import { useAppConfiguration } from "@/hooks";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+
+import {
+  customBackgroundsState,
+  selectedBackgroundState,
+  selectedThemeState,
+  themesState,
+} from "@/states";
 import styles from "./ThemeMenu.module.scss";
 
 const ThemeMenu = () => {
-  const {
-    themes,
-    customImages,
-    selectedTheme,
-    handleChangeTheme,
-    handleChangeImage,
-  } = useAppConfiguration();
+  const themes = useRecoilValue(themesState);
+  const [selectedTheme, setSelectedTheme] = useRecoilState(selectedThemeState);
+  const customBackgrounds = useRecoilValue(customBackgroundsState);
+  const setSelectedBackground = useSetRecoilState(selectedBackgroundState);
 
   const handleChangeDefaultImage = (theme: string) => {
     if (theme === "all") {
-      handleChangeImage(themes[0].name, themes[0].backgrounds[0]);
+      setSelectedBackground({
+        theme: themes[0].name,
+        ...themes[0].backgrounds[0],
+      });
     } else if (theme === "custom") {
-      handleChangeImage("custom", customImages?.[0] ?? { src: "" });
+      setSelectedBackground({
+        theme: "custom",
+        ...(customBackgrounds?.[0] ?? { src: "" }),
+      });
     } else {
-      handleChangeImage(
-        themes.filter(({ name: themeName }) => themeName === theme)[0].name,
-        themes.filter(({ name: themeName }) => themeName === theme)[0]
-          .backgrounds[0],
-      );
+      const selectedTheme = themes.filter(
+        ({ name: themeName }) => themeName === theme,
+      )[0];
+      setSelectedBackground({
+        theme: selectedTheme.name,
+        ...selectedTheme.backgrounds[0],
+      });
     }
   };
 
@@ -52,7 +64,7 @@ const ThemeMenu = () => {
             type="button"
             className={selectedTheme === name ? styles.selected : ""}
             onClick={() => {
-              handleChangeTheme(name);
+              setSelectedTheme(name);
               handleChangeDefaultImage(name);
             }}
           >

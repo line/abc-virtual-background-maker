@@ -1,6 +1,6 @@
 import { AxiosError, AxiosInstance } from "axios";
 
-import { Theme } from "@/constants";
+import type { Theme } from "@/constants";
 
 export const readConfigurationFromGithub = async (
   githubAxios: AxiosInstance,

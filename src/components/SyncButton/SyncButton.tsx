@@ -13,16 +13,76 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, useCallback, useState } from "react";
+import config from "~/output.config.json";
+import axios, { AxiosError } from "axios";
+import { useSetRecoilState } from "recoil";
 
-import { useAppConfiguration } from "@/hooks";
+import type { Config, Theme } from "@/constants";
+import { selectedBackgroundState, themesState } from "@/states";
+import { readConfigurationFromGithub } from "@/utils";
 import styles from "./SyncButton.module.scss";
+
+// Create a custom axios instance with default headers
+const githubAxios = axios.create({
+  headers: {
+    Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+  },
+});
 
 const SyncButton = (
   props: Pick<ButtonHTMLAttributes<HTMLButtonElement>, "className">,
 ) => {
   const { className = "" } = props;
-  const { isSyncing, handleClickSync } = useAppConfiguration();
+  const { themes, backgroundsUri } = config as unknown as Config;
+
+  const [isSyncing, setIsSyncing] = useState(false);
+  const setThemes = useSetRecoilState(themesState);
+  const setSelectedBackground = useSetRecoilState(selectedBackgroundState);
+
+  const resetThemes = useCallback(
+    async (path: string, type: string) => {
+      const lowerCasedType = type.trim().toLowerCase();
+
+      switch (lowerCasedType) {
+        case "filesystem":
+        case "cdn":
+          setThemes(
+            themes.filter(({ isHidden = false }) => !isHidden) as Array<Theme>,
+          );
+          setSelectedBackground((themes[0] as Theme)?.backgrounds[0] ?? []);
+          break;
+        case "github":
+          try {
+            const themes = await readConfigurationFromGithub(githubAxios, path);
+            if (themes) {
+              setThemes(themes.filter(({ isHidden = false }) => !isHidden));
+              setSelectedBackground(themes[0].backgrounds[0]);
+            }
+          } catch (error) {
+            console.error(
+              `Error reading configuration from github:`,
+              (error as AxiosError).message,
+            );
+          }
+          break;
+        default:
+          console.warn("Unknown type:", type);
+      }
+    },
+    [setSelectedBackground, setThemes, themes],
+  );
+
+  const handleClickSync = useCallback(() => {
+    setIsSyncing(true);
+    backgroundsUri && resetThemes(backgroundsUri.path, backgroundsUri.type);
+    const timer = setTimeout(() => {
+      setIsSyncing(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [backgroundsUri, resetThemes]);
+
   return (
     <button
       type="button"

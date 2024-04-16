@@ -14,16 +14,16 @@
  * under the License.
  */
 
-import { useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useRecoilState } from "recoil";
 
 import { Alert, AlertButton } from "@/components";
-import { useAppConfiguration, useDragAndDrop } from "@/hooks";
+import { useDragAndDrop } from "@/hooks";
+import { customBackgroundsState } from "@/states";
 import styles from "./DragAndDropFile.module.scss";
 
 const DragAndDropFile = () => {
-  const { handleChangeCustomImages, handleDropCustomImages } =
-    useAppConfiguration();
   const dragRef = useRef<HTMLInputElement>(null);
   const [showAlert, setShowAlert] = useState(false);
   const handleDrop = (e: DragEvent) => {
@@ -35,6 +35,30 @@ const DragAndDropFile = () => {
   };
   const { isDragging } = useDragAndDrop(dragRef, handleDrop);
   const { t } = useTranslation();
+  const [customBackgrounds, setCustomBackgrounds] = useRecoilState(
+    customBackgroundsState,
+  );
+
+  const handleChangeCustomImages = (event: ChangeEvent<HTMLInputElement>) => {
+    const src = URL.createObjectURL(
+      ((event.target as HTMLInputElement).files as FileList)[0],
+    );
+    setCustomBackgrounds([...customBackgrounds, { src, theme: "custom" }]);
+
+    return () => URL.revokeObjectURL(src);
+  };
+
+  const handleDropCustomImages = (event: DragEvent) => {
+    const file = ((event.dataTransfer as DataTransfer).files as FileList)[0];
+    const src = URL.createObjectURL(file);
+
+    if (file.type.includes("image")) {
+      setCustomBackgrounds([...customBackgrounds, { src, theme: "custom" }]);
+    } else {
+      throw new Error("FileNotAcceptable");
+    }
+    return () => URL.revokeObjectURL(src);
+  };
 
   return (
     <label className={styles.file}>

@@ -22,6 +22,7 @@ import {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { useRecoilValue } from "recoil";
 
 import {
   AlignSelect,
@@ -45,17 +46,25 @@ import {
   InputFieldGroup,
   Theme,
 } from "@/constants";
-import { useAppConfiguration, useImageColor } from "@/hooks";
+import { useImageColor } from "@/hooks";
 import { IconGithub } from "@/icons";
+import {
+  defaultInputFieldsState,
+  selectedBackgroundState,
+  selectedThemeState,
+  themesState,
+} from "@/states";
 import { convertRgbToHex } from "@/utils";
 import styles from "./Editor.module.scss";
 
 const DEFAULT_FONT_STYLE = "LINE Seed";
 
 const Editor = forwardRef<HTMLDivElement>((_, ref) => {
-  const { themes, selectedImage, selectedTheme, defaultInputFields } =
-    useAppConfiguration();
-  const { src, fontColor, theme } = selectedImage;
+  const selectedTheme = useRecoilValue(selectedThemeState);
+  const selectedBackground = useRecoilValue(selectedBackgroundState);
+  const defaultInputFields = useRecoilValue(defaultInputFieldsState);
+  const { src, fontColor, theme } = selectedBackground;
+  const themes = useRecoilValue(themesState);
   const { isDarkImage } = useImageColor(src);
   const [dragKey, setDragKey] = useState("");
   const [guideVisible, setGuideVisible] = useState(false);

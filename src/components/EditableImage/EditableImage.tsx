@@ -23,6 +23,7 @@ import {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { Alert, AlertButton, DragAndDropFile, TextInput } from "@/components";
 import {
@@ -32,12 +33,12 @@ import {
   InputField,
   InputFieldGroup,
 } from "@/constants";
+import { useDragAndDrop, useElementSize, useImageColor } from "@/hooks";
 import {
-  useAppConfiguration,
-  useDragAndDrop,
-  useElementSize,
-  useImageColor,
-} from "@/hooks";
+  customBackgroundsState,
+  defaultInputFieldsState,
+  selectedThemeState,
+} from "@/states";
 import { convertHexToRgb } from "@/utils";
 import styles from "./EditableImage.module.scss";
 
@@ -79,11 +80,27 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { isDarkImage } = useImageColor(src);
   const [imageRef, { width: imageWidth }] = useElementSize();
   const [initialColor, setInitialColor] = useState("");
-  const { selectedTheme, defaultInputFields, handleDropCustomImages } =
-    useAppConfiguration();
+  const defaultInputFields = useRecoilValue(defaultInputFieldsState);
+  const selectedTheme = useRecoilValue(selectedThemeState);
+  const [customBackgrounds, setCustomBackgrounds] = useRecoilState(
+    customBackgroundsState,
+  );
   const [showAlert, setShowAlert] = useState(false);
   const dragRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
+
+  const handleDropCustomImages = (event: DragEvent) => {
+    const file = ((event.dataTransfer as DataTransfer).files as FileList)[0];
+    const src = URL.createObjectURL(file);
+
+    if (file.type.includes("image")) {
+      setCustomBackgrounds([...customBackgrounds, { src, theme: "custom" }]);
+    } else {
+      throw new Error("FileNotAcceptable");
+    }
+    return () => URL.revokeObjectURL(src);
+  };
+
   const handleDrop = (e: DragEvent) => {
     try {
       handleDropCustomImages(e);
@@ -91,6 +108,7 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
       setShowAlert(true);
     }
   };
+
   const { isDragging } = useDragAndDrop(dragRef, handleDrop);
   const placeholderImage =
     "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
@@ -139,7 +157,7 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
         } as CSSProperties
       }
     >
-      {selectedTheme === "custom" ? (
+      {selectedTheme === "custom" && !src ? (
         <DragAndDropFile />
       ) : isImageDroppable ? (
         <div ref={dragRef} className={styles.drop}>
@@ -151,7 +169,6 @@ const EditableImage = forwardRef<HTMLDivElement, Props>((props, ref) => {
             width={size?.width ?? 1152}
             height={size?.width ?? 648}
             className={styles.preview}
-            loading={size ? "lazy" : "eager"}
           />
         </div>
       ) : (

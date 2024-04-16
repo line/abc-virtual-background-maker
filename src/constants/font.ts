@@ -15,7 +15,7 @@
  */
 import config from "~/output.config.json";
 
-import { Config } from "@/constants/config";
+import type { Config } from "@/constants";
 
 const { fonts } = config as unknown as Config;
 

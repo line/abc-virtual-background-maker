@@ -7,8 +7,7 @@ import stylelint from "vite-plugin-stylelint";
 import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-import type { Config } from "@/constants/config.ts";
-import type { Image } from "@/constants/image.ts";
+import type { Config, Image } from "@/constants";
 import config from "./app.config.json";
 
 // https://vitejs.dev/config/
