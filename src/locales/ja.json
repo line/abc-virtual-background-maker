@@ -1,0 +1,26 @@
+{
+  "title": {
+    "theme": "テーマ"
+  },
+  "option": {
+    "text": "テキストオプション",
+    "image": "画像オプション",
+    "flip": "水平反転",
+    "reset": "スタイルリセット",
+    "font": "フォント",
+    "size": "サイズ",
+    "color": "色",
+    "opacity": "不透明度",
+    "alignment": "整列"
+  },
+  "button": {
+    "download": "ダウンロード",
+    "contribute": "貢献する方法",
+    "github": "Github",
+    "confirm": "確認"
+  },
+  "alert": {
+    "uploadOnlyImages": "画像のみアップロードできます",
+    "makeSureImageExtensions": "アップロードしたいファイルが次の拡張子を持っていることを確認してください：.jpg、.jpeg、.png、.gif、.bmp、.webp"
+  }
+}
