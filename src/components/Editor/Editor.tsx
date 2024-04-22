@@ -29,7 +29,6 @@ import {
   ColorPicker,
   EditableImage,
   GuideDialog,
-  LocaleSelect,
   OpacityRange,
   Select,
   TextButton,
@@ -384,7 +383,6 @@ const Editor = forwardRef<HTMLDivElement>((_, ref) => {
             </ul>
           </>
         )}
-        <LocaleSelect />
       </div>
       <GuideDialog
         isVisible={guideVisible}

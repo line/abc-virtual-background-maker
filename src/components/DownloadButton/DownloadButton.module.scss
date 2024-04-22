@@ -24,6 +24,7 @@
   background-color: var(--key-color, var(--label-primary));
   border-radius: 0.375rem;
   overflow: hidden;
+  flex-shrink: 0;
 
   &:not(.disabled) {
     &::after {

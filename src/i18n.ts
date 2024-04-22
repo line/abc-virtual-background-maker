@@ -16,11 +16,17 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-import { LocaleResources, Locales } from "./constants/locale";
+import translationEn from "./locales/en.json";
+import translationJa from "./locales/ja.json";
+import translationKo from "./locales/ko.json";
 
 i18n.use(initReactI18next).init({
-  fallbackLng: Locales[0],
-  resources: LocaleResources,
+  fallbackLng: "en",
+  resources: {
+    en: { translation: translationEn },
+    ko: { translation: translationKo },
+    ja: { translation: translationJa },
+  },
 });
 
 export default i18n;

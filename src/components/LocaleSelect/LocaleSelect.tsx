@@ -16,11 +16,11 @@
 import { FocusEvent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Locales } from "@/constants/locale";
 import styles from "./LocaleSelect.module.scss";
 
 const LocaleSelect = () => {
   const { i18n } = useTranslation();
+  const locales = Object.keys(i18n.options.resources ?? {});
   const [showOptions, setShowOptions] = useState(false);
   const optionsRef = useRef<HTMLUListElement>(null);
 
@@ -44,7 +44,7 @@ const LocaleSelect = () => {
     }
   }, [showOptions]);
 
-  if (Locales.length <= 1) {
+  if (locales.length <= 1) {
     return <></>;
   }
 
@@ -69,7 +69,7 @@ const LocaleSelect = () => {
           }}
           onBlur={handleBlur}
         >
-          {Locales.map((locale, index) => {
+          {locales.map((locale, index) => {
             const isSelected = locale === i18n.language;
             const languageNames = new Intl.DisplayNames([locale], {
               type: "language",

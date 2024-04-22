@@ -23,6 +23,7 @@ import {
   DownloadButton,
   Editor,
   ImageList,
+  LocaleSelect,
   SyncButton,
   ThemeMenu,
 } from "@/components";
@@ -130,6 +131,7 @@ function App() {
         <h1 className={styles.logo}>
           <img src={logo} alt={text} width={255} height={20} />
         </h1>
+        <LocaleSelect />
         <DownloadButton
           onClick={() => {
             saveImage("abc-virtual-background.png");
