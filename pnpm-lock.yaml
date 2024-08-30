@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   axios:
-    specifier: ^1.6.5
-    version: 1.6.5
+    specifier: ^1.7.2
+    version: 1.7.2
   html2canvas:
     specifier: ^1.4.1
     version: 1.4.1
@@ -29,7 +29,7 @@ dependencies:
 
 devDependencies:
   '@ianvs/prettier-plugin-sort-imports':
-    specifier: ^4.1.1
+    specifier: ^4.3.0
     version: 4.3.1(prettier@3.2.5)
   '@types/node':
     specifier: ^20.11.30
@@ -41,8 +41,8 @@ devDependencies:
     specifier: ^18.2.75
     version: 18.2.75
   '@types/react-dom':
-    specifier: ^18.2.15
-    version: 18.2.15
+    specifier: ^18.2.25
+    version: 18.2.25
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.10.0
     version: 6.11.0(@typescript-eslint/parser@6.21.0)(eslint@8.54.0)(typescript@5.2.2)
@@ -107,8 +107,8 @@ devDependencies:
     specifier: ^4.2.0
     version: 4.2.0(typescript@5.2.2)(vite@5.4.2)
   vite-tsconfig-paths:
-    specifier: ^4.2.1
-    version: 4.2.1(typescript@5.2.2)(vite@5.4.2)
+    specifier: ^4.3.2
+    version: 4.3.2(typescript@5.2.2)(vite@5.1.7)
 
 packages:
 
@@ -1288,8 +1288,8 @@ packages:
     resolution: {integrity: sha512-dABtiRbR6TY6ViDvzPj9etP49GRBNGr8tFF2E08a4wgF6l+UdVjuNGemZj7kOcdbO8Mz3ER+LONw2Z7stsN5Kg==}
     dev: true
 
-  /@types/react-dom@18.2.15:
-    resolution: {integrity: sha512-HWMdW+7r7MR5+PZqJF6YFNSCtjz1T0dsvo/f1BV6HkV+6erD/nA7wd9NM00KVG83zf2nJ7uATPO9ttdIPvi3gg==}
+  /@types/react-dom@18.2.25:
+    resolution: {integrity: sha512-o/V48vf4MQh7juIKZU2QGDfli6p1+OOi5oXx36Hffpc9adsHeXjVp8rHuPkjd8VT8sOJ2Zp05HR7CdpGTIUFUA==}
     dependencies:
       '@types/react': 18.2.75
     dev: true
@@ -1659,8 +1659,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /axios@1.6.5:
-    resolution: {integrity: sha512-Ii012v05KEVuUoFWmMW/UQv9aRIc3ZwkWDcM+h5Il8izZCtRVpDUfwpoFf7eOtajT3QiGR4yDUx7lPqHJULgbg==}
+  /axios@1.7.2:
+    resolution: {integrity: sha512-2A8QhOMrbomlDuiLeK9XibIBzuHeRcqqNOHp0Cyp5EoJ1IFDh+XZH3A6BkXtv0K4gFGCI0Y4BM7B1wOEi0Rmgw==}
     dependencies:
       follow-redirects: 1.15.6
       form-data: 4.0.0
@@ -4631,12 +4631,12 @@ packages:
       typescript: 5.2.2
     dev: true
 
-  /tsconfck@2.1.2(typescript@5.2.2):
-    resolution: {integrity: sha512-ghqN1b0puy3MhhviwO2kGF8SeMDNhEbnKxjK7h6+fvY9JAxqvXi8y5NAHSQv687OVboS2uZIByzGd45/YxrRHg==}
-    engines: {node: ^14.13.1 || ^16 || >=18}
+  /tsconfck@3.0.3(typescript@5.2.2):
+    resolution: {integrity: sha512-4t0noZX9t6GcPTfBAbIbbIU4pfpCwh0ueq3S4O/5qXI1VwK1outmxhe9dOiEWqMz3MW2LKgDTpqWV+37IWuVbA==}
+    engines: {node: ^18 || >=20}
     hasBin: true
     peerDependencies:
-      typescript: ^4.3.5 || ^5.0.0
+      typescript: ^5.0.0
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -4883,8 +4883,9 @@ packages:
       - typescript
     dev: true
 
-  /vite-tsconfig-paths@4.2.1(typescript@5.2.2)(vite@5.4.2):
-    resolution: {integrity: sha512-GNUI6ZgPqT3oervkvzU+qtys83+75N/OuDaQl7HmOqFTb0pjZsuARrRipsyJhJ3enqV8beI1xhGbToR4o78nSQ==}
+  /vite-tsconfig-paths@4.3.2(typescript@5.2.2)(vite@5.1.7):
+    resolution: {integrity: sha512-0Vd/a6po6Q+86rPlntHye7F31zA2URZMbH8M3saAZ/xR9QoGN/L21bxEGfXdWmFdNkqPpRdxFT7nmNe12e9/uA==}
+
     peerDependencies:
       vite: '*'
     peerDependenciesMeta:
@@ -4893,8 +4894,9 @@ packages:
     dependencies:
       debug: 4.3.4
       globrex: 0.1.2
-      tsconfck: 2.1.2(typescript@5.2.2)
-      vite: 5.4.2(@types/node@20.11.30)(sass@1.72.0)
+      tsconfck: 3.0.3(typescript@5.2.2)
+      vite: 5.1.7(@types/node@20.11.30)(sass@1.72.0)
+
     transitivePeerDependencies:
       - supports-color
       - typescript
