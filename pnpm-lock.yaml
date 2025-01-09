@@ -88,8 +88,8 @@ importers:
         specifier: ^16.0.2
         version: 16.1.0(typescript@5.2.2)
       stylelint-config-recommended:
-        specifier: ^14.0.0
-        version: 14.0.0(stylelint@16.1.0(typescript@5.2.2))
+        specifier: ^14.0.1
+        version: 14.0.1(stylelint@16.1.0(typescript@5.2.2))
       stylelint-config-standard-scss:
         specifier: ^12.0.0
         version: 12.0.0(postcss@8.4.32)(stylelint@16.1.0(typescript@5.2.2))
@@ -5256,12 +5256,12 @@ snapshots:
     dependencies:
       postcss-scss: 4.0.9(postcss@8.4.32)
       stylelint: 16.1.0(typescript@5.2.2)
-      stylelint-config-recommended: 14.0.0(stylelint@16.1.0(typescript@5.2.2))
+      stylelint-config-recommended: 14.0.1(stylelint@16.1.0(typescript@5.2.2))
       stylelint-scss: 6.0.0(stylelint@16.1.0(typescript@5.2.2))
     optionalDependencies:
       postcss: 8.4.32
 
-  stylelint-config-recommended@14.0.0(stylelint@16.1.0(typescript@5.2.2)):
+  stylelint-config-recommended@14.0.1(stylelint@16.1.0(typescript@5.2.2)):
     dependencies:
       stylelint: 16.1.0(typescript@5.2.2)
 
@@ -5276,7 +5276,7 @@ snapshots:
   stylelint-config-standard@35.0.0(stylelint@16.1.0(typescript@5.2.2)):
     dependencies:
       stylelint: 16.1.0(typescript@5.2.2)
-      stylelint-config-recommended: 14.0.0(stylelint@16.1.0(typescript@5.2.2))
+      stylelint-config-recommended: 14.0.1(stylelint@16.1.0(typescript@5.2.2))
 
   stylelint-order@6.0.4(stylelint@16.1.0(typescript@5.2.2)):
     dependencies:
