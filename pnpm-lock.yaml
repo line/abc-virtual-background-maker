@@ -5288,6 +5288,8 @@ snapshots:
       dot-case: 3.0.4
       tslib: 2.6.2
 
+  source-map-js@1.0.2: {}
+
   source-map-js@1.2.0: {}
 
   space-separated-tokens@2.0.2: {}
