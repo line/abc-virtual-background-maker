@@ -20,11 +20,11 @@
   margin-bottom: 0.5rem;
 
   p {
-    @include font("12", "label-primary");
-
     display: flex;
     align-items: center;
     text-transform: capitalize;
+
+    @include font("12", "label-primary");
 
     span {
       margin-right: 0.25rem;

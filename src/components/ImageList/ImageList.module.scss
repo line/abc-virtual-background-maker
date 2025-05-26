@@ -20,23 +20,23 @@
   overflow: hidden auto;
 
   @include mobile {
-    @include scroll(horizontal);
-
     height: auto;
     padding: 0;
     margin: 0.25rem 0 0;
     padding-inline: 1.25rem 0;
+
+    @include scroll(horizontal);
   }
 
   > li {
-    @include pressed(medium);
-
     position: relative;
     width: 10rem;
     height: 5.625rem;
     margin: 0.5rem;
     border-radius: 0.5rem;
     box-shadow: 0 0 0 0.063rem var(--fill-tertiary);
+
+    @include pressed(medium);
 
     @include mobile {
       width: 7rem;

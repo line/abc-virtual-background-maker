@@ -14,8 +14,6 @@
  * under the License.
  */
 .picker {
-  @include font("12", "label-primary");
-
   position: relative;
   display: flex;
   align-items: center;
@@ -27,6 +25,8 @@
   background-color: var(--fill-quaternary);
   border: 1px solid transparent;
   border-radius: 0.25rem;
+
+  @include font("12", "label-primary");
 
   .color {
     width: 1rem;

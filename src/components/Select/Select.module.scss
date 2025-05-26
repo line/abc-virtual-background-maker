@@ -18,8 +18,6 @@
 }
 
 .button {
-  @include font("12", "label-primary");
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,6 +28,8 @@
   background-color: var(--fill-quaternary);
   border: 1px solid transparent;
   border-radius: 0.25rem;
+
+  @include font("12", "label-primary");
 
   .icon {
     font-size: 1rem;
@@ -47,8 +47,6 @@
 }
 
 .options {
-  @include font("12", "label-primary");
-
   position: absolute;
   right: 0;
   bottom: -0.125rem;
@@ -62,6 +60,8 @@
   border-radius: 0.25rem;
   transform: translateY(100%);
   animation: fade-in 0.3s cubic-bezier(0.17, 0.55, 0.55, 1);
+
+  @include font("12", "label-primary");
 
   @include mobile {
     max-height: 15rem;

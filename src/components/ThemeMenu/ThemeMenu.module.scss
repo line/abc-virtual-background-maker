@@ -18,9 +18,9 @@
   padding-left: 1.5rem;
 
   @include mobile {
-    @include scroll(horizontal);
-
     padding-right: 1.5rem;
+
+    @include scroll(horizontal);
   }
 
   > li {
@@ -37,8 +37,6 @@
   }
 
   button {
-    @include font("12", "label-primary");
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,6 +45,8 @@
     text-transform: capitalize;
     border: 0.5px solid transparent;
     border-radius: 0.5rem;
+
+    @include font("12", "label-primary");
 
     &:disabled {
       color: var(--label-secondary);

@@ -57,11 +57,11 @@
   }
 
   h3 {
-    @include font("16", "label-primary");
-
     padding-bottom: 1rem;
     font-weight: bold;
     text-transform: capitalize;
+
+    @include font("16", "label-primary");
 
     ~ h3 {
       margin-top: 1.5rem;

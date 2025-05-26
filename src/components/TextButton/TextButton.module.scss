@@ -14,13 +14,13 @@
  * under the License.
  */
 .button {
-  @include pressed;
-  @include font("12", "label-secondary");
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-weight: normal;
+
+  @include pressed;
+  @include font("12", "label-secondary");
 
   > span {
     margin-right: 0.25rem;
