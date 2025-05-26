@@ -15,8 +15,6 @@
  */
 
 .file {
-  @include font("16", "label-primary");
-
   position: absolute;
   top: 0;
   left: 0;
@@ -32,6 +30,8 @@
   overflow: hidden;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.5px 0.5px var(--fill-tertiary);
+
+  @include font("16", "label-primary");
 
   .dragging {
     z-index: 2;

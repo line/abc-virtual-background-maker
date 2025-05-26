@@ -33,8 +33,6 @@
   position: relative;
 
   .tag {
-    @include font("10");
-
     position: absolute;
     top: -0.1rem;
     left: -0.1rem;
@@ -45,6 +43,8 @@
     background-color: #3f0;
     transform: scale(0.9) translateY(-100%);
     transform-origin: top left;
+
+    @include font("10");
   }
 
   .label {

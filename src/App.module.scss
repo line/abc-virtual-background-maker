@@ -59,12 +59,12 @@
 
 .navigation {
   h2 {
-    @include font("16", "label-primary");
-
     display: inline-flex;
     align-items: center;
     padding: 1.5rem 1.5rem 1.25rem;
     font-weight: bold;
+
+    @include font("16", "label-primary");
 
     > button {
       margin-left: 0.5rem;

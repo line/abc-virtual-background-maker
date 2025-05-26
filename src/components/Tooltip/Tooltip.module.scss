@@ -1,6 +1,4 @@
 .tooltip {
-  @include font("16");
-
   z-index: 9;
   position: absolute;
   top: -4.5rem;
@@ -13,6 +11,8 @@
   background-color: #3f0;
   color: #000;
   white-space: nowrap;
+
+  @include font("16");
 
   :global {
     .material-symbols-outlined {

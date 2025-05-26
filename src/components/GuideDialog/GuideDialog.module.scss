@@ -76,23 +76,23 @@
     @include font("14", "label-primary");
 
     h1 {
-      @include font("24");
-
       font-weight: bold;
+
+      @include font("24");
     }
 
     h2 {
-      @include font("18");
-
       margin-top: 1rem;
       font-weight: bold;
+
+      @include font("18");
     }
 
     h3 {
-      @include font("16");
-
       margin-top: 0.5rem;
       font-weight: bold;
+
+      @include font("16");
     }
 
     p,

@@ -23,14 +23,18 @@ $breakpoint-tablet: 1280px;
 @mixin font($fontType, $color: null) {
   $fonts: f.$fonts;
 
-  @if map-has-key($fonts, $fontType) {
+  @if map.has-key($fonts, $fontType) {
     @each $key, $value in map.get($fonts, $fontType) {
-      #{$key}: $value;
+      & {
+        #{$key}: $value;
+      }
     }
   }
 
   @if $color {
-    color: var(--#{$color});
+    & {
+      color: var(--#{$color});
+    }
   }
 }
 
