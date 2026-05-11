@@ -73,8 +73,8 @@ importers:
         specifier: ^0.4.14
         version: 0.4.20(eslint@8.57.1)
       husky:
-        specifier: ^8.0.3
-        version: 8.0.3
+        specifier: ^9.1.7
+        version: 9.1.7
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
@@ -92,7 +92,7 @@ importers:
         version: 14.0.1(stylelint@16.1.0(typescript@5.2.2))
       stylelint-config-standard-scss:
         specifier: ^12.0.0
-        version: 12.0.0(postcss@8.4.32)(stylelint@16.1.0(typescript@5.2.2))
+        version: 12.0.0(postcss@8.4.41)(stylelint@16.1.0(typescript@5.2.2))
       stylelint-order:
         specifier: ^6.0.4
         version: 6.0.4(stylelint@16.1.0(typescript@5.2.2))
@@ -104,7 +104,7 @@ importers:
         version: 5.4.2(@types/node@20.11.30)(sass@1.81.0)
       vite-plugin-stylelint:
         specifier: ^5.3.1
-        version: 5.3.1(postcss@8.4.32)(rollup@4.21.1)(stylelint@16.1.0(typescript@5.2.2))(vite@5.4.2(@types/node@20.11.30)(sass@1.81.0))
+        version: 5.3.1(postcss@8.4.41)(rollup@4.21.1)(stylelint@16.1.0(typescript@5.2.2))(vite@5.4.2(@types/node@20.11.30)(sass@1.81.0))
       vite-plugin-svgr:
         specifier: ^4.2.0
         version: 4.2.0(rollup@4.21.1)(typescript@5.2.2)(vite@5.4.2(@types/node@20.11.30)(sass@1.81.0))
@@ -930,6 +930,7 @@ packages:
 
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
+    deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
   '@vitejs/plugin-react@4.2.1':
     resolution: {integrity: sha512-oojO9IDc4nCUUi8qIR11KoQm0XFFLIwsRBwHRR4d/88IWghn1y6ckz/bJ8GHDCsYEJee8mDzqtJxh15/cisJNQ==}
@@ -1561,11 +1562,12 @@ packages:
   glob@10.3.10:
     resolution: {integrity: sha512-fa46+tv1Ak0UPK1TOy/pZrIybNNt4HCv7SDzwyfiOZkvZLEbjsZkJBPtDHVshZjbecAoAGSC20MjLDG/qr679g==}
     engines: {node: '>=16 || 14 >=14.17'}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   global-modules@2.0.0:
     resolution: {integrity: sha512-NGbfmJBp9x8IxyJSd1P+otYK8vonoJactOogrVfFRIAEY1ukil8RSKDz2Yo7wh1oihl51l/r6W4epkeKJHqL8A==}
@@ -1665,9 +1667,9 @@ packages:
     resolution: {integrity: sha512-nZXjEF2nbo7lIw3mgYjItAfgQXog3OjJogSbKa2CQIIvSGWcKgeJnQlNXip6NglNzYH45nSRiEVimMvYL8DDqQ==}
     engines: {node: '>=14.18.0'}
 
-  husky@8.0.3:
-    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
-    engines: {node: '>=14'}
+  husky@9.1.7:
+    resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
+    engines: {node: '>=18'}
     hasBin: true
 
   ignore@5.3.0:
@@ -4485,7 +4487,7 @@ snapshots:
 
   human-signals@4.3.1: {}
 
-  husky@8.0.3: {}
+  husky@9.1.7: {}
 
   ignore@5.3.0: {}
 
@@ -5110,9 +5112,9 @@ snapshots:
     dependencies:
       postcss: 8.4.32
 
-  postcss-scss@4.0.9(postcss@8.4.32):
+  postcss-scss@4.0.9(postcss@8.4.41):
     dependencies:
-      postcss: 8.4.32
+      postcss: 8.4.41
 
   postcss-selector-parser@6.0.13:
     dependencies:
@@ -5420,26 +5422,26 @@ snapshots:
     dependencies:
       inline-style-parser: 0.2.2
 
-  stylelint-config-recommended-scss@14.0.0(postcss@8.4.32)(stylelint@16.1.0(typescript@5.2.2)):
+  stylelint-config-recommended-scss@14.0.0(postcss@8.4.41)(stylelint@16.1.0(typescript@5.2.2)):
     dependencies:
-      postcss-scss: 4.0.9(postcss@8.4.32)
+      postcss-scss: 4.0.9(postcss@8.4.41)
       stylelint: 16.1.0(typescript@5.2.2)
       stylelint-config-recommended: 14.0.1(stylelint@16.1.0(typescript@5.2.2))
       stylelint-scss: 6.0.0(stylelint@16.1.0(typescript@5.2.2))
     optionalDependencies:
-      postcss: 8.4.32
+      postcss: 8.4.41
 
   stylelint-config-recommended@14.0.1(stylelint@16.1.0(typescript@5.2.2)):
     dependencies:
       stylelint: 16.1.0(typescript@5.2.2)
 
-  stylelint-config-standard-scss@12.0.0(postcss@8.4.32)(stylelint@16.1.0(typescript@5.2.2)):
+  stylelint-config-standard-scss@12.0.0(postcss@8.4.41)(stylelint@16.1.0(typescript@5.2.2)):
     dependencies:
       stylelint: 16.1.0(typescript@5.2.2)
-      stylelint-config-recommended-scss: 14.0.0(postcss@8.4.32)(stylelint@16.1.0(typescript@5.2.2))
+      stylelint-config-recommended-scss: 14.0.0(postcss@8.4.41)(stylelint@16.1.0(typescript@5.2.2))
       stylelint-config-standard: 35.0.0(stylelint@16.1.0(typescript@5.2.2))
     optionalDependencies:
-      postcss: 8.4.32
+      postcss: 8.4.41
 
   stylelint-config-standard@35.0.0(stylelint@16.1.0(typescript@5.2.2)):
     dependencies:
@@ -5691,7 +5693,7 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite-plugin-stylelint@5.3.1(postcss@8.4.32)(rollup@4.21.1)(stylelint@16.1.0(typescript@5.2.2))(vite@5.4.2(@types/node@20.11.30)(sass@1.81.0)):
+  vite-plugin-stylelint@5.3.1(postcss@8.4.41)(rollup@4.21.1)(stylelint@16.1.0(typescript@5.2.2))(vite@5.4.2(@types/node@20.11.30)(sass@1.81.0)):
     dependencies:
       '@rollup/pluginutils': 5.1.0(rollup@4.21.1)
       chokidar: 3.5.3
@@ -5699,7 +5701,7 @@ snapshots:
       stylelint: 16.1.0(typescript@5.2.2)
       vite: 5.4.2(@types/node@20.11.30)(sass@1.81.0)
     optionalDependencies:
-      postcss: 8.4.32
+      postcss: 8.4.41
       rollup: 4.21.1
     transitivePeerDependencies:
       - supports-color
